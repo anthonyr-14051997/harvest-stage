@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Outflow;
 use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,14 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inflows', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('value', 6, 2);
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('category_outflow', function (Blueprint $table) {
+            
 
-            /* $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Category::class); */
+            $table->foreignIdFor(Outflow::class);
+            $table->foreignIdFor(Category::class);
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inflows');
+        Schema::dropIfExists('category_outflow');
     }
 };

@@ -12,19 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- <x-jet-nav-link href="{{ route('index') }}" :active="request()->routeIs('index')">
-                        {{ __('Accueil') }}
+                    <x-jet-nav-link href="{{ route('balances') }}" :active="request()->routeIs('balances')">
+                        {{ __('Balances') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+                    <x-jet-nav-link href="{{ route('salaries.index') }}" :active="request()->routeIs('salaries.index')">
                         {{ __('Salaire') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('inflow') }}" :active="request()->routeIs('inflow')">
+                    <x-jet-nav-link href="{{ route('inflows.index') }}" :active="request()->routeIs('inflows.index')">
                         {{ __('Entrées') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('outflow') }}" :active="request()->routeIs('outflow')">
+                    <x-jet-nav-link href="{{ route('outflows.index') }}" :active="request()->routeIs('outflows.index')">
                         {{ __('Sorties') }}
-                    </x-jet-nav-link> --}}
+                    </x-jet-nav-link>
                 </div> 
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

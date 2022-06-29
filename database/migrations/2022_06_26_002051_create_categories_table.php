@@ -32,3 +32,17 @@ return new class extends Migration
         Schema::dropIfExists('categories');
     }
 };
+
+/* 
+$table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')
+                ->references('id')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->unsignedBigInteger('outflow_id');
+            $table->foreign('outflow_id')
+                ->references('id')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+*/

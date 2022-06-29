@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Category::class);
+            /* $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Category::class); */
         });
     }
 
