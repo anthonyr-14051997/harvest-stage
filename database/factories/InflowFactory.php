@@ -17,7 +17,9 @@ class InflowFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'value' => $this->faker->numberBetween(100, 500),
+            'name' => $this->faker->sentence(rand(5, 10), true),
+            'user_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

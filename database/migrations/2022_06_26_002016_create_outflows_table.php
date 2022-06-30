@@ -18,12 +18,12 @@ return new class extends Migration
         Schema::create('outflows', function (Blueprint $table) {
             $table->id();
             $table->decimal('value', 6, 2);
-            $table->Integer('periode');
+            $table->integer('periode');
             $table->string('name');
             $table->timestamps();
 
-            /* $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Category::class); */
+            $table->foreignIdFor(User::class);
+            /* $table->foreignIdFor(Category::class); */
         });
     }
 

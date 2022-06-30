@@ -15,7 +15,8 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        return view('stage.salary');
+        $salaries = Salary::get();
+        return view('stage.salary', compact('salaries'));
     }
 
     /**

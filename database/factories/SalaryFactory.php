@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class SalaryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'value' => $this->faker->numberBetween(100, 500),
+            'name' => $this->faker->sentence(rand(5, 10), true),
+            'periode' => $this->faker->numberBetween(1, 12),
+            'user_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

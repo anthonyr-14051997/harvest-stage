@@ -15,7 +15,8 @@ class OutflowController extends Controller
      */
     public function index()
     {
-        return view('stage.outflow');
+        $outflows = Outflow::get();
+        return view('stage.outflow', compact('outflows'));
     }
 
     /**

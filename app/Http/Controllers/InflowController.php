@@ -15,7 +15,8 @@ class InflowController extends Controller
      */
     public function index()
     {
-        return view('stage.inflow');
+        $inflows = Inflow::get();
+        return view('stage.inflow', compact('inflows'));
     }
 
     /**

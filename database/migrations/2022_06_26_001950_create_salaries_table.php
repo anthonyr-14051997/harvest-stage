@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('value', 6, 2);
             $table->string('name');
+            $table->integer('periode');
             $table->timestamps();
 
             $table->foreignIdFor(User::class);

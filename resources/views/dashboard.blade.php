@@ -1,2 +1,8 @@
 
-@extends('layouts.test')
+@extends('layouts.connected')
+
+@section('sidebar')
+
+
+
+@stop
