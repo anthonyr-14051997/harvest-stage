@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Inflow;
 use App\Http\Requests\StoreInflowRequest;
 use App\Http\Requests\UpdateInflowRequest;
@@ -15,8 +16,9 @@ class InflowController extends Controller
      */
     public function index()
     {
-        $inflows = Inflow::get();
-        return view('stage.inflow', compact('inflows'));
+        $inflows = Inflow::with('category', 'user')->get();
+        $categories = Category::get();
+        return view('stage.inflow', compact('inflows', 'categories'));
     }
 
     /**
@@ -26,7 +28,7 @@ class InflowController extends Controller
      */
     public function create()
     {
-        //
+        return view('stage.add_inflow');
     }
 
     /**
@@ -37,7 +39,12 @@ class InflowController extends Controller
      */
     public function store(StoreInflowRequest $request)
     {
-        //
+        Inflow::create([
+            'name' => $request->title,
+            'value' => $request->value,
+        ]);
+
+        return redirect()->route('inflows.index')->with('success', 'Votre post a été créé');
     }
 
     /**

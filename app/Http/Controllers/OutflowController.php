@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Outflow;
 use App\Http\Requests\StoreOutflowRequest;
 use App\Http\Requests\UpdateOutflowRequest;
@@ -15,8 +16,9 @@ class OutflowController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $outflows = Outflow::get();
-        return view('stage.outflow', compact('outflows'));
+        return view('stage.outflow', compact('outflows', 'categories'));
     }
 
     /**

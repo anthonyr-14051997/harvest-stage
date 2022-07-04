@@ -2,12 +2,24 @@
 
 @section('sidebar')
 {{-- start --}}
+
+{{-- <div class="mb-3 xl:w-96">
+    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+        <option selected>Toutes les catégories</option>
+
+        @foreach ($categories as $category)
+        <option value="1">{{ __('Se connecter') }}</option>
+        @endforeach
+
+    </select>
+</div> --}}
+
 @section('overview')
 
     {{-- ---------- overview --}}
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-lg leading-6 font-medium text-gray-900">Overview</h2>
+        <h2 class="text-lg leading-6 font-medium text-gray-900">Balances</h2>
         <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Card -->
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Salary;
+use App\Models\User;
 use App\Http\Requests\StoreSalaryRequest;
 use App\Http\Requests\UpdateSalaryRequest;
 
@@ -15,7 +16,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::get();
+        $salaries = Salary::with('user')->get();
         return view('stage.salary', compact('salaries'));
     }
 
@@ -48,6 +49,7 @@ class SalaryController extends Controller
      */
     public function show(Salary $salary)
     {
+        /* $salaries = Salary::where() */
         return view('stage.salary');
     }
 

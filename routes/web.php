@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChartJSController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\InflowController;
 use App\Http\Controllers\OutflowController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\OutflowController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+Route::get('chart', [ChartJSController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',

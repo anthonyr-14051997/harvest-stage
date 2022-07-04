@@ -1,9 +1,15 @@
 @extends('layouts.connected')
 
 @section('sidebar')
+
+
+
 @section('table')
 
-  <h2 class="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">Recent activity</h2>
+  <h2 class="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">Salaires</h2>
+
+  
+
   <!-- Activity list (smallest breakpoint only) -->
   
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -11,13 +17,16 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    value
+                    Titre
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    name
+                    salaire
                 </th>
                 <th scope="col" class="px-6 py-3">
                     periode
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    nom
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Edit</span>
@@ -28,13 +37,16 @@
           @foreach ($salaries as $salary)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                    {{ $salary->value }}
+                    {{ Str::limit($salary->name, 50) }}
                 </th>
                 <td class="px-6 py-4">
-                  {{ $salary->name }}
+                  {{ $salary->value }}
                 </td>
                 <td class="px-6 py-4">
                   {{ $salary->periode }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ $salary->user->name }}
                 </td>
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
