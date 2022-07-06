@@ -14,17 +14,27 @@
     @endforeach
   </div>
 
-  <form action="{{ route('inflows.store') }}" method="post">
+  <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data">
       @csrf
       <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
           <label for="name" class="block text-xs font-medium text-gray-900">Titre</label>
-          <input type="text" name="name" id="title" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Votre titre">
+          <input type="text" name="title" id="title" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Votre titre">
       </div>
       <div>
           <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
           <div class="mt-1 relative rounded-md shadow-sm">
-            <input type="text" name="price" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
+            <input type="text" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
           </div>
+      </div>
+      <div class="mb-3 xl:w-76">
+        <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+          <option selected>Toutes les catégories</option>
+          
+          @foreach ($categories as $category)
+          <option value="{{ $category->id }}">{{ Str::limit($category->name, 7) }}</option>
+          @endforeach
+      
+        </select>
       </div>
       <div>
           <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-black outline-none">
@@ -33,16 +43,7 @@
       </div>
   </form>
 
-  <div class="mb-3 xl:w-96">
-    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-      <option selected>Toutes les catégories</option>
-      
-      @foreach ($categories as $category)
-      <option value="1">{{ $category->name }}</option>
-      @endforeach
   
-    </select>
-  </div>
 
   <!-- Activity list (smallest breakpoint only) -->
 
@@ -51,19 +52,52 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    nom
+                  <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option selected>Nom</option>
+                      <option value="1">A - Z</option>
+                      <option value="1">Z - A</option>
+                    </select>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    titre
+                  <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option selected>Titre</option>
+                      <option value="1">A - Z</option>
+                      <option value="1">Z - A</option>
+                    </select>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    date
+                  <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option selected>Date</option>
+                      <option value="1">Plus récent</option>
+                      <option value="1">Moins récent</option>
+                    </select>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    valeur
+                  <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option selected>Valeur</option>
+                      <option value="1">Croissant</option>
+                      <option value="1">Décroissant</option>
+                    </select>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    catégorie
+                  <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option selected>Toutes les catégories</option>
+                      
+                      @foreach ($categories as $category)
+                      <option value="1">{{ Str::limit($category->name, 15) }}</option>
+                      @endforeach
+                  
+                    </select>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Edit</span>

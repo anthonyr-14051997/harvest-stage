@@ -16,7 +16,7 @@ class ChartJSController extends Controller
      */
     public function index()
     {
-        $users = Inflow::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+        $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
                     ->whereYear('created_at', date('Y'))
                     ->groupBy(DB::raw("month_name"))
                     ->orderBy('id','ASC')
