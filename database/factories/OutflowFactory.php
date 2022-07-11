@@ -17,9 +17,10 @@ class OutflowFactory extends Factory
     public function definition()
     {
         return [
-            'value' => $this->faker->numberBetween(100, 500),
+            'value' => $this->faker->randomFloat(2, 100, 2500),
             'periode' => $this->faker->numberBetween(1, 12),
-            'name' => $this->faker->sentence(rand(5, 10), true),
+            'name' => $this->faker->words(rand(1, 3), true),
+            'date' => $this->faker->date(),
             'user_id' => $this->faker->numberBetween(1, 10),
         ];
     }

@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Category;
+/* use App\Models\CategoryOutflow; */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,10 +21,10 @@ return new class extends Migration
             $table->decimal('value', 6, 2);
             $table->integer('periode');
             $table->string('name');
+            $table->date('date');
             $table->timestamps();
 
             $table->foreignIdFor(User::class);
-            /* $table->foreignIdFor(Category::class); */
         });
     }
 

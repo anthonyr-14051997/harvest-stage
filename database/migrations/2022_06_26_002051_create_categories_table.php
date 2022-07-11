@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Inflow;
+use App\Models\Outflow;
+/* use App\Models\CategoryInflow;
+use App\Models\CategoryOutflow; */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +18,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
+            
             $table->id();
             $table->string('name');
-            $table->integer('periode');
             $table->timestamps();
+
         });
     }
 

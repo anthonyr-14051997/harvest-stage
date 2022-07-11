@@ -16,11 +16,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category_inflow', function (Blueprint $table) {
-            /* $table->id();
-            $table->timestamps(); */
 
             $table->foreignIdFor(Inflow::class);
             $table->foreignIdFor(Category::class);
+            
         });
     }
 

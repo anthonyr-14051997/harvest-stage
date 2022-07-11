@@ -13,11 +13,12 @@ class Category extends Model
 
     public function inflows()
     {
-        return $this->hasMany(Inflow::class);
+        return $this->belongsToMany(Inflow::class);
     }
 
     public function outflows()
     {
-        return $this->hasMany(Outflow::class);
+        return $this->belongsToMany(Outflow::class);
     }
+
 }

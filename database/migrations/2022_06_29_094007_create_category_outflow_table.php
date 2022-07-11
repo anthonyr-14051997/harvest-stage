@@ -16,10 +16,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category_outflow', function (Blueprint $table) {
-            
 
             $table->foreignIdFor(Outflow::class);
             $table->foreignIdFor(Category::class);
+
         });
     }
 

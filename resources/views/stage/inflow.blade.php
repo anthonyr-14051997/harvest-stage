@@ -1,12 +1,11 @@
 @extends('layouts.connected')
 
 @section('sidebar')
-
-
-
 @section('table')
 
-  <h2 class="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">Entrées</h2>
+  @section('title')
+  <h2 class="text-2xl font-semibold text-gray-900">Entrées</h2>
+  @stop
 
   <div class="my-5">
     @foreach ($errors->all() as $error)
@@ -14,32 +13,36 @@
     @endforeach
   </div>
 
-  <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="m-6">
       @csrf
       <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-          <label for="name" class="block text-xs font-medium text-gray-900">Titre</label>
-          <input type="text" name="title" id="title" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Votre titre">
+          <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
+          <input type="text" name="title" id="title" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre">
       </div>
-      <div>
+      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
           <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
           <div class="mt-1 relative rounded-md shadow-sm">
             <input type="text" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
           </div>
       </div>
-      <div class="mb-3 xl:w-76">
+      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
         <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
           <option selected>Toutes les catégories</option>
           
           @foreach ($categories as $category)
-          <option value="{{ $category->id }}">{{ Str::limit($category->name, 7) }}</option>
+          <option value="{{ $category->id }}">{{ Str::limit($category->name, 50) }}</option>
           @endforeach
       
         </select>
       </div>
-      <div>
-          <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-black outline-none">
-              Créer mon entrée
-          </button>
+      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+        <button type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <!-- Heroicon name: outline/plus-sm -->
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+        <span class="">Créer mon entrée</span>
       </div>
   </form>
 

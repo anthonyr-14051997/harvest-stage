@@ -19,28 +19,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        $categories = Category::factory(5)->create();
+        $categories = Category::factory(20)->create();
+        User::factory(10)->create();
+        Inflow::factory(100)->create();
+        Outflow::factory(50)->create();
 
-        User::factory(10)->create()->each(function ($user) use ($categories) {
-            Inflow::factory(rand(1, 3))->create([
-                'user_id' => $user->id
-                /* 'category_id' => ($categories->random(1)->first())->id */
-            ]);
-            Outflow::factory(rand(1, 3))->create([
-                'user_id' => $user->id
-                /* 'category_id' => ($categories->random(1)->first())->id */
-            ]);
-            Salary::factory(rand(1, 3))->create([
-                'user_id' => $user->id
-                /* 'category_id' => ($categories->random(1)->first())->id */
-            ]);
+        Inflow::all()->each(function ($inflow) use ($categories) {
+            $inflow->categories()->attach(
+                $categories->random(rand(1, 20))->pluck('id')->toArray()
+            );
         });
+
+        Outflow::all()->each(function ($outflow) use ($categories) {
+            $outflow->categories()->attach(
+                $categories->random(rand(1, 20))->pluck('id')->toArray()
+            );
+        });
+
     }
 }

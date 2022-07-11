@@ -25,7 +25,7 @@
 <script type="text/javascript">
   
     var labels =  {{ Js::from($labels) }};
-    var users =  {{ Js::from($data) }};
+    var values =  {{ Js::from($data) }};
   
     const data = {
         labels: labels,
@@ -33,7 +33,7 @@
             label: 'My First dataset',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: users,
+            data: values,
         }]
     };
   
