@@ -16,8 +16,8 @@ class OutflowController extends Controller
      */
     public function index()
     {
+        $outflows = Outflow::where('user_id', auth()->user()->id)->get();
         $categories = Category::all();
-        $outflows = Outflow::get();
         return view('stage.outflow', compact('outflows', 'categories'));
     }
 

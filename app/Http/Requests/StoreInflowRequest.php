@@ -24,7 +24,7 @@ class StoreInflowRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'title' => 'required',
             'value' => 'required'
         ];
     }

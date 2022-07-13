@@ -21,4 +21,9 @@ class Category extends Model
         return $this->belongsToMany(Outflow::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

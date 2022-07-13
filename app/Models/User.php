@@ -73,4 +73,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Outflow::class);
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
 }

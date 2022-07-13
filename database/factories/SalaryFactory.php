@@ -21,7 +21,7 @@ class SalaryFactory extends Factory
             'value' => $this->faker->randomFloat(2, 100, 2500),
             'name' => $this->faker->sentence(rand(5, 10), true),
             'periode' => $this->faker->numberBetween(1, 12),
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'user_id' => $this->faker->numberBetween(1, 11),
         ];
     }
 }

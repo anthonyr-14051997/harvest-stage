@@ -14,13 +14,25 @@ class ChartJSController extends Controller
      *
      * @return response()
      */
+    /* public function index()
+    {
+        $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+                    ->whereYear('created_at', date('Y'))
+                    ->groupBy(DB::raw("month_name"))
+                    ->orderBy('id','ASC')
+                    ->pluck('count', 'month_name');
+ 
+        $labels = $users->keys();
+        $data = $users->values();
+              
+        return view('chart', compact('labels', 'data'));
+    } */
+
     public function index()
     {
-        $inflows = Inflow::select(DB::raw("COUNT(*) as count"), DB::raw("value as val"))
-                    ->where('value')
-                    ->groupBy(DB::raw("val"))
+        $inflows = Inflow::select(DB::raw("COUNT(*) as count"), "value")
                     ->orderBy('user_id','ASC')
-                    ->pluck('count', 'val');
+                    ->pluck('count', 'value');
  
         $labels = $inflows->keys();
         $data = $inflows->values();

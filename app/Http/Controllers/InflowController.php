@@ -16,8 +16,8 @@ class InflowController extends Controller
      */
     public function index()
     {
-        $inflows = Inflow::with('category', 'user')->get();
-        $categories = Category::get();
+        $inflows = Inflow::where('user_id', auth()->user()->id)->get();
+        $categories = auth()->user()->categories;
         return view('stage.inflow', compact('inflows', 'categories'));
     }
 
@@ -42,6 +42,8 @@ class InflowController extends Controller
         Inflow::create([
             'name' => $request->title,
             'value' => $request->value,
+            'date' => now(),
+            'user_id' => auth()->user()->id,
         ]);
 
         return redirect()->route('inflows.index')->with('success', 'Votre post a été créé');

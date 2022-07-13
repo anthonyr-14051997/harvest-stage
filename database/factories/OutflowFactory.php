@@ -21,7 +21,7 @@ class OutflowFactory extends Factory
             'periode' => $this->faker->numberBetween(1, 12),
             'name' => $this->faker->words(rand(1, 3), true),
             'date' => $this->faker->date(),
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'user_id' => $this->faker->numberBetween(1, 11),
         ];
     }
 }
