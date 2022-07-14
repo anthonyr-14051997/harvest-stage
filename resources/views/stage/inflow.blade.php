@@ -12,51 +12,70 @@
         <span class="block text-red-500">{{ $error }}</span>
     @endforeach
   </div>
+    
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal_">
+      
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-  <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="m-6">
-      @csrf
-      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-          <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
-          <input type="text" name="title" id="title" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre">
-      </div>
-      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-          <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
-          <div class="mt-1 relative rounded-md shadow-sm">
-            <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
+      <div class="fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+          
+          <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
+            <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="m-6">
+              @csrf
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
+                  <input type="text" name="title" id="title" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre">
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                    <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
+                  </div>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label for="cat" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input type="text" name="cat" class="add_category focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Créer votre catégorie" aria-describedby="price-currency">
+                </div>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    @foreach ($categories as $category)
+                    <td class="px-6 py-4">
+                      <button type="button" name="category" class="all_category inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {{ $category->name }}
+                      </button>
+                    </td>
+                    @endforeach
+                  </tr>
+                  
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label class="block text-sm font-medium text-gray-700">Mes catégories selectionnées</label>
+              </div>
+              <div name="" class="category_add border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                
+              </div>
+              <button type="submit" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <!-- Heroicon name: outline/plus-sm -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </button>
+            </form>
+            <div class="mt-5 sm:mt-6">
+              <button type="button" id="modal_bg" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Go back to dashboard</button>
+            </div>
           </div>
-      </div>
-      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-        <label for="price" class="block text-sm font-medium text-gray-700">Catégorie</label>
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <input type="text" name="add_category" class="add_category focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Créer votre catégorie" aria-describedby="price-currency">
         </div>
       </div>
-      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-          
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            @foreach ($categories as $category)
-            <td class="px-6 py-4">
-              <button type="button" class="all_category inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ $category->name }}
-              </button>
-            </td>
-            @endforeach
-          </tr>
-          
-      </div>
-      <div class="category_add border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-        <label class="block text-sm font-medium text-gray-700">Mes catégories selectionnées</label>
-      </div>
-      <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-        <button type="submit" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <!-- Heroicon name: outline/plus-sm -->
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </button>
-        <span class="">Créer mon entrée</span>
-      </div>
-  </form>
+    </div>
+
+    <span id="modal_op" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
+  
 
   <!-- Activity list (smallest breakpoint only) -->
 
@@ -207,6 +226,23 @@
         element.remove();
       })
     });
+
+    // modale
+
+    const modal = document.getElementById('modal_');
+    const modal_bg = document.getElementById('modal_bg');
+    const modal_op = document.getElementById('modal_op');
+
+    modal_op.style.cursor = "pointer";
+    modal.style.display = "none";
+
+    modal_bg.addEventListener('click', function () {
+      modal.style.display = "none";
+    })
+
+    modal_op.addEventListener('click', function () {
+      modal.style.display = "block";
+    })
   
   </script>
 
