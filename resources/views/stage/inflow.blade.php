@@ -22,16 +22,16 @@
         <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
           
           <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
-            <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="m-6">
+            <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
               @csrf
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
-                  <input type="text" name="title" id="title" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre">
+                  <input type="text" name="title" id="title" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre" required>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
                   <div class="mt-1 relative rounded-md shadow-sm">
-                    <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency">
+                    <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency" required>
                   </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
@@ -59,7 +59,7 @@
               <div name="" class="category_add border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 
               </div>
-              <button type="submit" class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button type="submit" onclick="submitButtonClick(event)" class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -171,8 +171,13 @@
   <script type="text/javascript">
 
     const catall = document.querySelectorAll('.all_category');
-    let catadd = document.querySelector('.add_category');
+    const catadd = document.querySelectorAll('.add_category');
     const empty = document.querySelector('.category_add');
+    const form = document.querySelector('.form');
+
+    function submitButtonClick(event) {
+        event.preventDefault();
+    }
 
     let tab = [];
     
@@ -183,13 +188,16 @@
       });
     });
     
-    catadd.addEventListener('keypress', function (e) {
-      e.preventDefault();
-      if (e.key === "Enter" || e.key === "13") {
-        catadd = catadd.value;
-        category_add_empty(a = null, catadd, empty);
-      }
-    });
+    catadd.forEach(element => {
+      element.addEventListener('keypress', function (element) {
+        if (element.key === "Enter" || element.key === "13") {
+          console.log(element);
+          element = element.value;
+          category_add_empty(a = null, element, empty);
+        }
+      });
+    })
+    
   
     function category_add_empty (catall = null, catadd = null, empty) {
       if (catadd != null) {
