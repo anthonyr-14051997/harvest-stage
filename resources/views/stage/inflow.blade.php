@@ -35,9 +35,9 @@
                   </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                <label for="cat" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
-                  <input type="text" name="cat" class="add_category focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Créer votre catégorie" aria-describedby="price-currency">
+                  <input type="text" class="add_category focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Créer votre catégorie">
                 </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
@@ -59,7 +59,7 @@
               <div name="" class="category_add border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 
               </div>
-              <button type="submit" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button type="submit" class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <span id="modal_op" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
+    <span id="modal_op" class="inline-flex items-center mb-6 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
   
 
   <!-- Activity list (smallest breakpoint only) -->
@@ -85,47 +85,38 @@
             <tr>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option selected>Nom</option>
-                      <option value="1">A - Z</option>
-                      <option value="1">Z - A</option>
+                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option>Titre</option>
+                      <option>A - Z</option>
+                      <option>Z - A</option>
                     </select>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option selected>Titre</option>
-                      <option value="1">A - Z</option>
-                      <option value="1">Z - A</option>
+                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option>Date</option>
+                      <option>Plus récent</option>
+                      <option>Moins récent</option>
                     </select>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option selected>Date</option>
-                      <option value="1">Plus récent</option>
-                      <option value="1">Moins récent</option>
+                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option>Valeur</option>
+                      <option>Croissant</option>
+                      <option>Décroissant</option>
                     </select>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option selected>Valeur</option>
-                      <option value="1">Croissant</option>
-                      <option value="1">Décroissant</option>
-                    </select>
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option selected>Toutes les catégories</option>
+                    <select class="form-select appearance-none block w-full {{-- absolute de la flèche--> --}} px-3 py-1.5 {{-- <-- absolute de la flèche --}} text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option>Toutes les catégories</option>
                       
                       @foreach ($categories as $category)
-                      <option value="1">{{ Str::limit($category->name, 15) }}</option>
+                      <option>{{ Str::limit($category->name, 15) }}</option>
                       @endforeach
                   
                     </select>
@@ -139,9 +130,6 @@
         <tbody>
           @foreach ($inflows as $inflow)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                    {{ $inflow->user->name }}
-                </th>
                 <td class="px-6 py-4">
                   {{ Str::limit($inflow->name, 25) }}
                 </td>
@@ -185,7 +173,8 @@
     const catall = document.querySelectorAll('.all_category');
     let catadd = document.querySelector('.add_category');
     const empty = document.querySelector('.category_add');
-    const del_cat = document.querySelectorAll('.del_cat');
+
+    let tab = [];
     
     catall.forEach(element => {
       element.addEventListener('click', function () {
@@ -212,6 +201,7 @@
     }
 
     function create_cat(a, b) {
+        tab += a;
         let btn = document.createElement('a');
         let t = document.createTextNode(a);
         btn.appendChild(t);
@@ -219,13 +209,28 @@
         btn.style.cursor = "pointer";
         btn.style.marginLeft = "5px";
         b.appendChild(btn);
+        take_del_cat();
     }
 
-    del_cat.forEach(element => {
-      element.addEventListener('click', function () {
-        element.remove();
-      })
-    });
+    function take_del_cat() {
+      const del_cat = document.querySelectorAll('.del_cat');
+      del_cat.forEach(element => {
+        element.addEventListener('click', function () {
+          element.remove();
+        })
+      });
+    }
+    
+    // select option
+
+    const select = document.querySelectorAll('.form-select');
+
+    select.forEach(element => {
+      console.log(element.value);
+      if (element === element.selected) {
+        
+      }
+    })
 
     // modale
 

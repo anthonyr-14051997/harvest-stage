@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Salary;
 use App\Models\User;
+use App\Models\Inflow;
+use App\Models\Outflow;
+use App\Models\Category;
+use DB;
 use App\Http\Requests\StoreSalaryRequest;
 use App\Http\Requests\UpdateSalaryRequest;
 
@@ -16,8 +20,20 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::with('user')->get();
-        return view('stage.salary', compact('salaries'));
+        $inflows = Inflow::sum('value');
+        $outflows = Outflow::sum('value');
+
+        $sum = $inflows - $outflows; // chiffre d'affaires annuel sans tva
+
+        $tva = $sum * 22;
+        $tva_add = $tva / 100;
+        $sum_tva = $sum - $tva_add; // chiffre d'affaire annuel avec tva
+
+        $month_tva = $sum_tva / 12; // salaire au mois en comptant la tva
+
+        $month = $sum / 12;
+        
+        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month'));
     }
 
     /**
@@ -49,8 +65,14 @@ class SalaryController extends Controller
      */
     public function show(Salary $salary)
     {
-        /* $salaries = Salary::where() */
-        return view('stage.salary');
+        $inflows = Inflow::select(DB::raw("COUNT(*) as count"), "value")
+                    ->orderBy('user_id','ASC')
+                    ->pluck('count', 'value');
+        $outflows = Outflow::select(DB::raw("COUNT(*) as count"), "value")
+                    ->orderBy('user_id','ASC')
+                    ->pluck('count', 'value');
+        
+        return view('stage.salary', compact('inflows', 'outflows'));
     }
 
     /**

@@ -39,7 +39,15 @@ class OutflowController extends Controller
      */
     public function store(StoreOutflowRequest $request)
     {
-        //
+        Outflow::create([
+            'name' => $request->title,
+            'value' => $request->value,
+            'periode' => $request->periode,
+            'date' => now(),
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('outflows.index')->with('success', 'Votre post a été créé');
     }
 
     /**
