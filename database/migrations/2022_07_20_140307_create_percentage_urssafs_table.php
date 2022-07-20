@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\User;
-use App\Models\Category;
-use App\Models\PercentageUrssaf;
-/* use App\Models\CategoryInflow; */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inflows', function (Blueprint $table) {
+        Schema::create('percentage_urssafs', function (Blueprint $table) {
             $table->id();
-            $table->decimal('value', 6, 2);
             $table->string('name');
-            $table->date('date');
+            $table->float('percentage');
             $table->timestamps();
-
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(PercentageUrssaf::class);
         });
     }
 
@@ -36,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inflows');
+        Schema::dropIfExists('percentage_urssafs');
     }
 };

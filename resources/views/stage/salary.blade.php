@@ -9,9 +9,16 @@
   @endforeach
 </div>
 
-  @foreach($tva_one as $one)
+  @foreach($three->$inflow_percent as $one)
     <td class="px-6 py-4">
-      {{ $one->value }}
+      {{ $one->percentage }}
+    </td>
+  @endforeach
+  
+
+  @foreach($inflow_value as $two)
+    <td class="px-6 py-4">
+      {{ $two->value }}
     </td>
   @endforeach
 

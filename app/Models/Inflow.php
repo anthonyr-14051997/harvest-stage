@@ -21,4 +21,9 @@ class Inflow extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function percentage_urssaf()
+    {
+        return $this->belongsTo(PercentageUrssaf::class);
+    }
+
 }

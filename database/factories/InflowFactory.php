@@ -21,6 +21,7 @@ class InflowFactory extends Factory
             'name' => $this->faker->words(rand(1, 3), true),
             'date' => $this->faker->date(),
             'user_id' => $this->faker->numberBetween(1, 11),
+            'percentage_urssaf_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 }

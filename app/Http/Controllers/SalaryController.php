@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Inflow;
 use App\Models\Outflow;
 use App\Models\Category;
+use App\Models\PercentageUrssaf;
 use DB;
 use App\Http\Requests\StoreSalaryRequest;
 use App\Http\Requests\UpdateSalaryRequest;
@@ -23,21 +24,32 @@ class SalaryController extends Controller
 
         // salaire 
 
-        $inflows_select = Inflow::select('value')->get();
-
-        /* $val = $inflows_select->value; */
-
-        foreach ($val as $key) {
-            $inflow_tva_one = $key * 22;
-            $inflow_tva_one = $inflow_tva_one / 100;
-            $tva_one = $key - $inflow_tva_one;
+        $inflows = Inflow::where('user_id', auth()->user()->id)->get();
+        foreach ($inflows as $inflow) {
+            $inflow_value = $inflow->value;
+            $inflow_percent = $inflow->percentage_urssaf->percentage;
+            $urssaf = $inflow_value * $inflow_percent;
+            $urssaf_taxe = $urssaf / 100;
+            $inflow_val_taxe = $inflow_value - $urssaf_taxe;
         }
-
-        $tva_one = $inflows_select;
 
         // salaire généraux
 
-        $inflows = Inflow::sum('value');
+        $inflow_year_sum = Inflow::where('user_id', auth()->user()->id)->whereYear('date', '1974')->sum('value');
+
+        $inflow_month = $inflow_year_sum / 12;
+
+        /* 
+        2022
+        Jusqu'à 10 225 €	0 %
+        De 10 226 € à 26 070 €	11 %
+        De 26 071 € à 74 545 €	30 %
+        De 74 546 € à 160 336 €	41 %
+        Supérieur à 160 336 €	45 % 
+        */
+
+        dd(round($inflow_month, 2));
+        
         $outflows = Outflow::sum('value');
 
         $sum = $inflows - $outflows; // chiffre d'affaires annuel sans tva
@@ -55,7 +67,7 @@ class SalaryController extends Controller
         $month_tva = number_format($month_tva, 2, '.', ' ');
         $month = number_format($month, 2, '.', ' ');
         
-        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month', 'tva_one'));
+        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month', 'inflow_percent', 'inflow_value'));
     }
 
     /**
