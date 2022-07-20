@@ -33,6 +33,11 @@ class SalaryController extends Controller
 
         $month = $sum / 12;
         
+        $sum = number_format($sum, 2, ' , ', ' ');
+        $sum_tva = number_format($sum_tva, 2, ' , ', ' ');
+        $month_tva = number_format($month_tva, 2, ' , ', ' ');
+        $month = number_format($month, 2, ' , ', ' ');
+        
         return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month'));
     }
 
