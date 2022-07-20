@@ -25,7 +25,8 @@ class StoreInflowRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'value' => 'required'
+            'value' => 'required',
+            'categories' => 'required',
         ];
     }
 }

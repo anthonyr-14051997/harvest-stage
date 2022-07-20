@@ -9,6 +9,12 @@
   @endforeach
 </div>
 
+  @foreach($tva_one as $one)
+    <td class="px-6 py-4">
+      {{ $one->value }}
+    </td>
+  @endforeach
+
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">Salaires (tva comprises)</h2>
       <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -24,11 +30,11 @@
                 </div>
                 <div class="ml-5 w-0 flex-1">
                   <dl>
-                      <dt class="text-sm font-medium text-gray-500 truncate">Salaire au mois</dt>
+                      <dt class="text-sm font-medium text-gray-500 truncate">Salaire Net</dt>
                       <dd>
                         <div class="text-lg font-medium text-gray-900">{{ $month_tva }}€</div>
                       </dd>
-                      <dt class="text-sm font-medium text-gray-500 truncate">Salaire à l'année</dt>
+                      <dt class="text-sm font-medium text-gray-500 truncate">CA Net</dt>
                       <dd>
                         <div class="text-lg font-medium text-gray-900">{{ $sum_tva }}€</div>
                       </dd>
@@ -60,11 +66,11 @@
                   </div>
                   <div class="ml-5 w-0 flex-1">
                     <dl>
-                        <dt class="text-sm font-medium text-gray-500 truncate">Salaire au mois</dt>
+                        <dt class="text-sm font-medium text-gray-500 truncate">Salaire Brut</dt>
                         <dd>
                           <div class="text-lg font-medium text-gray-900">{{ $month }}€</div>
                         </dd>
-                        <dt class="text-sm font-medium text-gray-500 truncate">Salaire à l'année</dt>
+                        <dt class="text-sm font-medium text-gray-500 truncate">CA Brut</dt>
                         <dd>
                           <div class="text-lg font-medium text-gray-900">{{ $sum }}€</div>
                         </dd>

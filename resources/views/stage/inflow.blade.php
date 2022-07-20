@@ -34,19 +34,19 @@
                     <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency" required>
                   </div>
               </div>
+              
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
-                  <input type="text" name="cat" id="input-value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="price-currency" required>
+                  <input type="text" id="input-value" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="price-currency">
                 </div>
-                <button class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="li-generate">ajouter</button>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     @foreach ($categories as $category)
                     <td class="px-6 py-4">
-                      <button type="button" name="category" class="all_category inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <button type="button" class="all_category inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         {{ $category->name }}
                       </button>
                     </td>
@@ -54,21 +54,20 @@
                   </tr>
                   
               </div>
-              <button type="submit" onclick="submitButtonClick(event)" class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <!-- Heroicon name: outline/plus-sm -->
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </button>
+              
 
               {{-- <div class="flex mt-4">
                 <input class="autocomplete" id="input-value" type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
                 
               </div> --}}
-              <label class="block text-sm font-medium text-gray-700">Mes catégories selectionnées</label>
-              <ul class="collection ulList border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                {{-- Categorie goes here --}}
-              </ul>
+              
+
+              <button type="submit"{{--  onclick="submitButtonClick(event)" --}} class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <!-- Heroicon name: outline/plus-sm -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </button>
 
             </form>
             <div class="mt-5 sm:mt-6">
@@ -175,96 +174,47 @@
 
   <script type="text/javascript">
 
-    const catall = document.querySelectorAll('.all_category');
-    const catadd = document.querySelector('.add_category');
-    const empty = document.querySelector('.category_add');
-    const form = document.querySelector('.form');
+    // category
 
-    function submitButtonClick(event) {
-        event.preventDefault();
-    }
+    const cat_add = document.querySelector('#input-value');
+    const cat_all = document.querySelectorAll('.all_category');
 
-    let tab = [];
-    
-    // select option
-
-    const select = document.querySelectorAll('.form-select');
-
-    select.forEach(element => {
-      console.log(element.value);
-      if (element === element.selected) {
-        
-      }
+    cat_all.forEach(element => {
+      element.addEventListener('click', function () {
+        cat_add.value += element.firstChild.nodeValue.trim() + ", ";
+      })
     })
+  
+  </script>
+
+  <script type="text/javascript">
 
     // modale
 
-    const modal = document.getElementById('modal_');
-    const modal_bg_class = document.querySelector('.modal_bg');
-    const modal_bg_id = document.querySelector('#modal_bg');
-    const modal_op = document.getElementById('modal_op');
+      const modal = document.getElementById('modal_');
+      const modal_bg_class = document.querySelector('.modal_bg');
+      const modal_bg_id = document.querySelector('#modal_bg');
+      const modal_op = document.getElementById('modal_op');
 
-    modal_op.style.cursor = "pointer";
-    modal.style.display = "none";
-
-    window.addEventListener('click', function(e) {
-      if (e.target === modal_bg_id) {
-        modal.style.display = "none";
-      }
-    })
-
-    modal_bg_class.addEventListener('click', function () {
+      modal_op.style.cursor = "pointer";
       modal.style.display = "none";
-    })
 
-    modal_op.addEventListener('click', function () {
-      modal.style.display = "block";
-    })
-
-    // category
-
-    catall.forEach(element => {
-      element.addEventListener('click', function () {
-        licreate(element);
-      });
-    });
-
-    function licreate(d) {
-        const li = document.createElement('li');
-        li.className = "test flex bg-indigo-600 text-white py-1 px-2 rounded-lg mt-2 justify-between";
-        li.innerHTML = `${d.firstChild.nodeValue} <div class="remove cursor-pointer">X</div>`;
-        ul.appendChild(li);
-        inpt.value = "";
-    }
-
-    // test sheena
-
-    const btn = document.querySelector('#li-generate');
-    const inpt = document.querySelector('#input-value');
-    const ul = document.querySelector('.ulList');
-
-    btn.addEventListener('click', liGenerate);
-    document.addEventListener('click', liDelete);
-
-    function liGenerate(e) {
-        const li = document.createElement('li');
-
-        if (inpt.value !== "") {
-            li.className = "flex bg-indigo-600 text-white py-1 px-2 rounded-lg mt-2 justify-between";
-            li.innerHTML = `${inpt.value} <div class="remove cursor-pointer">X</div>`;
-            ul.appendChild(li);
-            inpt.value = "";
+      window.addEventListener('click', function(e) {
+        if (e.target === modal_bg_id) {
+          modal.style.display = "none";
         }
-        e.preventDefault();
-    }
+      })
 
-    function liDelete(e) {
-        if (e.target.className === 'remove cursor-pointer') {
-            e.target.parentElement.remove();
-        }
-    }
-  
-  </script>
+      modal_bg_class.addEventListener('click', function () {
+        modal.style.display = "none";
+      })
+
+      modal_op.addEventListener('click', function () {
+        modal.style.display = "block";
+      })
+</script>
+
+
 
 @stop
 @stop

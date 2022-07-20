@@ -20,6 +20,23 @@ class SalaryController extends Controller
      */
     public function index()
     {
+
+        // salaire 
+
+        $inflows_select = Inflow::select('value')->get();
+
+        /* $val = $inflows_select->value; */
+
+        foreach ($val as $key) {
+            $inflow_tva_one = $key * 22;
+            $inflow_tva_one = $inflow_tva_one / 100;
+            $tva_one = $key - $inflow_tva_one;
+        }
+
+        $tva_one = $inflows_select;
+
+        // salaire généraux
+
         $inflows = Inflow::sum('value');
         $outflows = Outflow::sum('value');
 
@@ -29,16 +46,16 @@ class SalaryController extends Controller
         $tva_add = $tva / 100;
         $sum_tva = $sum - $tva_add; // chiffre d'affaire annuel avec tva
 
-        $month_tva = $sum_tva / 12; // salaire au mois en comptant la tva
+        $month = $sum / 12; // salaire au mois sans tva
 
-        $month = $sum / 12;
+        $month_tva = $sum_tva / 12; // salaire au mois avec tva
+
+        $sum = number_format($sum, 2, '.', ' ');
+        $sum_tva = number_format($sum_tva, 2, '.', ' ');
+        $month_tva = number_format($month_tva, 2, '.', ' ');
+        $month = number_format($month, 2, '.', ' ');
         
-        $sum = number_format($sum, 2, ' , ', ' ');
-        $sum_tva = number_format($sum_tva, 2, ' , ', ' ');
-        $month_tva = number_format($month_tva, 2, ' , ', ' ');
-        $month = number_format($month, 2, ' , ', ' ');
-        
-        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month'));
+        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month', 'tva_one'));
     }
 
     /**

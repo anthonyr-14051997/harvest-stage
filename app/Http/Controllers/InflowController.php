@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Inflow;
 use App\Http\Requests\StoreInflowRequest;
 use App\Http\Requests\UpdateInflowRequest;
+use Illuminate\Support\Str;
 
 class InflowController extends Controller
 {
@@ -39,6 +40,19 @@ class InflowController extends Controller
      */
     public function store(StoreInflowRequest $request)
     {
+
+        $collection = Str::of($request->categories)->explode(',');
+
+        foreach ($collection as $category) {
+            $check_category = Str::of($category)->trim();
+            if($check_category != ""){
+                Category::firstOrCreate([
+                    'name' => $check_category,
+                    'user_id' => auth()->user()->id,
+                ]);
+            }
+        }
+        
         Inflow::create([
             'name' => $request->title,
             'value' => $request->value,
