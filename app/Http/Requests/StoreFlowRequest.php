@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateInflowRequest extends FormRequest
+class StoreFlowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateInflowRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateInflowRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'value' => 'required',
+            'categories' => 'required',
         ];
     }
 }

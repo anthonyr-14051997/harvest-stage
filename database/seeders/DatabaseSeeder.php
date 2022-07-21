@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Inflow;
-use App\Models\Outflow;
+use App\Models\Flow;
 use App\Models\Salary;
 use App\Models\Category;
 use App\Models\User;
@@ -22,6 +21,15 @@ class DatabaseSeeder extends Seeder
     {
 
         $categories = Category::factory(20)->create();
+        
+        User::factory(10)->create();
+        Flow::factory(500)->create();
+
+        Flow::all()->each(function ($flow) use ($categories) {
+            $flow->categories()->attach(
+                $categories->random(rand(1, 20))->pluck('id')->toArray()
+            );
+        });
 
         PercentageUrssaf::create([
             'name' => 'achat revente hébergement', 
@@ -35,24 +43,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'profession libérale', 
             'percentage' => '22.2'
         ]);
-        
-        User::factory(10)->create();
-        Inflow::factory(100)->create();
-        Outflow::factory(50)->create();
-
-        Inflow::all()->each(function ($inflow) use ($categories) {
-            $inflow->categories()->attach(
-                $categories->random(rand(1, 20))->pluck('id')->toArray()
-            );
-        });
-
-        Outflow::all()->each(function ($outflow) use ($categories) {
-            $outflow->categories()->attach(
-                $categories->random(rand(1, 20))->pluck('id')->toArray()
-            );
-        });
-
-        
 
     }
 }

@@ -9,19 +9,6 @@
   @endforeach
 </div>
 
-  @foreach($three->$inflow_percent as $one)
-    <td class="px-6 py-4">
-      {{ $one->percentage }}
-    </td>
-  @endforeach
-  
-
-  @foreach($inflow_value as $two)
-    <td class="px-6 py-4">
-      {{ $two->value }}
-    </td>
-  @endforeach
-
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">Salaires (tva comprises)</h2>
       <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -39,11 +26,11 @@
                   <dl>
                       <dt class="text-sm font-medium text-gray-500 truncate">Salaire Net</dt>
                       <dd>
-                        <div class="text-lg font-medium text-gray-900">{{ $month_tva }}€</div>
+                        <div class="text-lg font-medium text-gray-900">{{ $flow_month_taxe }}€</div>
                       </dd>
                       <dt class="text-sm font-medium text-gray-500 truncate">CA Net</dt>
                       <dd>
-                        <div class="text-lg font-medium text-gray-900">{{ $sum_tva }}€</div>
+                        <div class="text-lg font-medium text-gray-900">{{ $flow_taxe }}€</div>
                       </dd>
                   </dl>
                 </div>
@@ -75,11 +62,11 @@
                     <dl>
                         <dt class="text-sm font-medium text-gray-500 truncate">Salaire Brut</dt>
                         <dd>
-                          <div class="text-lg font-medium text-gray-900">{{ $month }}€</div>
+                          <div class="text-lg font-medium text-gray-900">{{ $flow_month }}€</div>
                         </dd>
                         <dt class="text-sm font-medium text-gray-500 truncate">CA Brut</dt>
                         <dd>
-                          <div class="text-lg font-medium text-gray-900">{{ $sum }}€</div>
+                          <div class="text-lg font-medium text-gray-900">{{ $flow_year_sum }}€</div>
                         </dd>
                     </dl>
                   </div>

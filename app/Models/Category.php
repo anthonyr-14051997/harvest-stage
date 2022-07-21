@@ -11,14 +11,9 @@ class Category extends Model
 
     protected $guarded = [];
 
-    public function inflows()
+    public function flows()
     {
-        return $this->belongsToMany(Inflow::class);
-    }
-
-    public function outflows()
-    {
-        return $this->belongsToMany(Outflow::class);
+        return $this->belongsToMany(Flow::class);
     }
 
     public function user()

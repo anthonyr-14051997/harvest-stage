@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Outflow>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Flow>
  */
-class OutflowFactory extends Factory
+class FlowFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,11 @@ class OutflowFactory extends Factory
     {
         return [
             'value' => $this->faker->randomFloat(2, 100, 2500),
-            'periode' => $this->faker->numberBetween(1, 12),
             'name' => $this->faker->words(rand(1, 3), true),
             'date' => $this->faker->date(),
+            'type' => $this->faker->randomElements(['inflow', 'outflow'], 1),
             'user_id' => $this->faker->numberBetween(1, 11),
+            'percentage_urssaf_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 }

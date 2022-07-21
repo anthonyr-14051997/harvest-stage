@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJSController;
 use App\Http\Controllers\SalaryController;
-use App\Http\Controllers\InflowController;
-use App\Http\Controllers\OutflowController;
+use App\Http\Controllers\FlowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +32,7 @@ Route::middleware([
     })->name('dashboard');
     
     Route::resource('salaries', SalaryController::class);
-    Route::resource('inflows', InflowController::class);
-    Route::resource('outflows', OutflowController::class);
+    Route::resource('flows', FlowController::class);
     
     Route::get('/stage/balances', function () {
         return view('/stage/balances');

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Inflow;
+use App\Models\Flow;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class InflowPolicy
+class FlowPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class InflowPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Inflow $inflow)
+    public function view(User $user, Flow $flow)
     {
         //
     }
@@ -48,10 +48,10 @@ class InflowPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Inflow $inflow)
+    public function update(User $user, Flow $flow)
     {
         //
     }
@@ -60,10 +60,10 @@ class InflowPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Inflow $inflow)
+    public function delete(User $user, Flow $flow)
     {
         //
     }
@@ -72,10 +72,10 @@ class InflowPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Inflow $inflow)
+    public function restore(User $user, Flow $flow)
     {
         //
     }
@@ -84,10 +84,10 @@ class InflowPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Inflow $inflow)
+    public function forceDelete(User $user, Flow $flow)
     {
         //
     }

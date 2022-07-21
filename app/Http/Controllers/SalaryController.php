@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Salary;
 use App\Models\User;
-use App\Models\Inflow;
-use App\Models\Outflow;
+use App\Models\Flow;
 use App\Models\Category;
 use App\Models\PercentageUrssaf;
 use DB;
@@ -24,20 +23,56 @@ class SalaryController extends Controller
 
         // salaire 
 
-        $inflows = Inflow::where('user_id', auth()->user()->id)->get();
-        foreach ($inflows as $inflow) {
-            $inflow_value = $inflow->value;
-            $inflow_percent = $inflow->percentage_urssaf->percentage;
-            $urssaf = $inflow_value * $inflow_percent;
+        $flows = Flow::where('user_id', auth()->user()->id)->get();
+        foreach ($flows as $flow) {
+            $flow_value = $flow->value;
+            $flow_percent = $flow->percentage_urssaf->percentage;
+            $urssaf = $flow_value * $flow_percent;
             $urssaf_taxe = $urssaf / 100;
-            $inflow_val_taxe = $inflow_value - $urssaf_taxe;
+            $flow_val_taxe = $flow_value - $urssaf_taxe;
         }
 
         // salaire généraux
 
-        $inflow_year_sum = Inflow::where('user_id', auth()->user()->id)->whereYear('date', '1974')->sum('value');
+        $flow_year_sum = Flow::where('user_id', auth()->user()->id)->whereYear('date', date('Y'))->where('type', 'inflow')->sum('value');
 
-        $inflow_month = $inflow_year_sum / 12;
+        $flow_month = $flow_year_sum / 12;
+
+        switch ($flow_year_sum) {
+            case ($flow_year_sum<=10225):
+                $flow_taxe = $flow_year_sum;
+                break;
+            case ($flow_year_sum<=26070):
+                $flow_year_sum_calc = $flow_year_sum * 11;
+                $flow_year_sum_calc = $flow_year_sum_calc / 100;
+                $flow_taxe = $flow_year_sum_calc;
+                break;
+            case ($flow_year_sum<=74545):
+                $flow_year_sum_calc = $flow_year_sum * 30;
+                $flow_year_sum_calc = $flow_year_sum_calc / 100;
+                $flow_taxe = $flow_year_sum_calc;
+                break;
+            case ($flow_year_sum<=160336):
+                $flow_year_sum_calc = $flow_year_sum * 41;
+                $flow_year_sum_calc = $flow_year_sum_calc / 100;
+                $flow_taxe = $flow_year_sum_calc;
+                break;
+            case ($flow_year_sum>=160337):
+                $flow_year_sum_calc = $flow_year_sum * 45;
+                $flow_year_sum_calc = $flow_year_sum_calc / 100;
+                $flow_taxe = $flow_year_sum_calc;
+                break;
+            default:
+                $flow_taxe = $flow_year_sum;
+                break;
+        }
+
+        $flow_month_taxe = $flow_taxe / 12;
+
+        $flow_year_sum = number_format($flow_year_sum, 2, '.', ' '); // CA sans taxes
+        $flow_month = number_format($flow_month, 2, '.', ' '); // salaire brut
+        $flow_taxe = number_format($flow_taxe, 2, '.', ' '); // CA avec taxes
+        $flow_month_taxe = number_format($flow_month_taxe, 2, '.', ' '); // salaire net
 
         /* 
         2022
@@ -47,27 +82,8 @@ class SalaryController extends Controller
         De 74 546 € à 160 336 €	41 %
         Supérieur à 160 336 €	45 % 
         */
-
-        dd(round($inflow_month, 2));
         
-        $outflows = Outflow::sum('value');
-
-        $sum = $inflows - $outflows; // chiffre d'affaires annuel sans tva
-
-        $tva = $sum * 22;
-        $tva_add = $tva / 100;
-        $sum_tva = $sum - $tva_add; // chiffre d'affaire annuel avec tva
-
-        $month = $sum / 12; // salaire au mois sans tva
-
-        $month_tva = $sum_tva / 12; // salaire au mois avec tva
-
-        $sum = number_format($sum, 2, '.', ' ');
-        $sum_tva = number_format($sum_tva, 2, '.', ' ');
-        $month_tva = number_format($month_tva, 2, '.', ' ');
-        $month = number_format($month, 2, '.', ' ');
-        
-        return view('stage.salary', compact('month_tva', 'sum_tva', 'sum', 'month', 'inflow_percent', 'inflow_value'));
+        return view('stage.salary', compact('flow_year_sum', 'flow_month', 'flow_taxe', 'flow_month_taxe'));
     }
 
     /**
@@ -99,14 +115,14 @@ class SalaryController extends Controller
      */
     public function show(Salary $salary)
     {
-        $inflows = Inflow::select(DB::raw("COUNT(*) as count"), "value")
+        $flows = Flow::select(DB::raw("COUNT(*) as count"), "value")
                     ->orderBy('user_id','ASC')
                     ->pluck('count', 'value');
         $outflows = Outflow::select(DB::raw("COUNT(*) as count"), "value")
                     ->orderBy('user_id','ASC')
                     ->pluck('count', 'value');
         
-        return view('stage.salary', compact('inflows', 'outflows'));
+        return view('stage.salary', compact('flows', 'outflows'));
     }
 
     /**

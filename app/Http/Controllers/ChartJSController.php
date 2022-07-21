@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
     
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Inflow;
+use App\Models\Flow;
 use DB;
     
 class ChartJSController extends Controller
@@ -30,12 +30,12 @@ class ChartJSController extends Controller
 
     public function index()
     {
-        $inflows = Inflow::select(DB::raw("COUNT(*) as count"), "value")
+        $flows = Flow::select(DB::raw("COUNT(*) as count"), "value")
                     ->orderBy('user_id','ASC')
                     ->pluck('count', 'value');
  
-        $labels = $inflows->keys();
-        $data = $inflows->values();
+        $labels = $flows->keys();
+        $data = $flows->values();
               
         return view('chart', compact('labels', 'data'));
     }

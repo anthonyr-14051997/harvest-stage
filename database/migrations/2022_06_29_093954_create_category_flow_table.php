@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Outflow;
+use App\Models\Flow;
 use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,11 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_outflow', function (Blueprint $table) {
+        Schema::create('category_flow', function (Blueprint $table) {
 
-            $table->foreignIdFor(Outflow::class);
+            $table->foreignIdFor(Flow::class);
             $table->foreignIdFor(Category::class);
-
+            
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_outflow');
+        Schema::dropIfExists('category_flow');
     }
 };

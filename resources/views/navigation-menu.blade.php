@@ -18,11 +18,8 @@
                     <x-jet-nav-link href="{{ route('salaries.index') }}" :active="request()->routeIs('salaries.index')">
                         {{ __('Salaire') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('inflows.index') }}" :active="request()->routeIs('inflows.index')">
+                    <x-jet-nav-link href="{{ route('flows.index') }}" :active="request()->routeIs('flows.index')">
                         {{ __('Entrées') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('outflows.index') }}" :active="request()->routeIs('outflows.index')">
-                        {{ __('Sorties') }}
                     </x-jet-nav-link>
                 </div> 
 

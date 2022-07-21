@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Inflow;
-use App\Http\Requests\StoreInflowRequest;
-use App\Http\Requests\UpdateInflowRequest;
+use App\Models\Flow;
+use App\Http\Requests\StoreFlowRequest;
+use App\Http\Requests\UpdateFlowRequest;
 use Illuminate\Support\Str;
 
-class InflowController extends Controller
+class FlowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class InflowController extends Controller
      */
     public function index()
     {
-        $inflows = Inflow::where('user_id', auth()->user()->id)->get();
+        $flows = Flow::where('user_id', auth()->user()->id)->get();
         $categories = auth()->user()->categories;
-        return view('stage.inflow', compact('inflows', 'categories'));
+        return view('stage.flow', compact('flows', 'categories'));
     }
 
     /**
@@ -29,16 +29,16 @@ class InflowController extends Controller
      */
     public function create()
     {
-        return view('stage.add_inflow');
+        return view('stage.add_flow');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreInflowRequest  $request
+     * @param  \App\Http\Requests\StoreFlowRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInflowRequest $request)
+    public function store(StoreFlowRequest $request)
     {
 
         $collection = Str::of($request->categories)->explode(',');
@@ -53,23 +53,23 @@ class InflowController extends Controller
             }
         }
         
-        Inflow::create([
+        Flow::create([
             'name' => $request->title,
             'value' => $request->value,
             'date' => now(),
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect()->route('inflows.index')->with('success', 'Votre post a été créé');
+        return redirect()->route('flows.index')->with('success', 'Votre post a été créé');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Http\Response
      */
-    public function show(Inflow $inflow)
+    public function show(Flow $flow)
     {
         //
     }
@@ -77,10 +77,10 @@ class InflowController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inflow $inflow)
+    public function edit(Flow $flow)
     {
         //
     }
@@ -88,11 +88,11 @@ class InflowController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateInflowRequest  $request
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Http\Requests\UpdateFlowRequest  $request
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateInflowRequest $request, Inflow $inflow)
+    public function update(UpdateFlowRequest $request, Flow $flow)
     {
         //
     }
@@ -100,10 +100,10 @@ class InflowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Inflow  $inflow
+     * @param  \App\Models\Flow  $flow
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inflow $inflow)
+    public function destroy(Flow $flow)
     {
         //
     }

@@ -64,14 +64,9 @@ class User extends Authenticatable
         return $this->hasMany(Salary::class);
     }
 
-    public function inflows()
+    public function flows()
     {
-        return $this->hasMany(Inflow::class);
-    }
-
-    public function outflows()
-    {
-        return $this->hasMany(Outflow::class);
+        return $this->hasMany(Flow::class);
     }
 
     public function categories()

@@ -9,8 +9,8 @@ class PercentageUrssaf extends Model
 {
     use HasFactory;
 
-    public function inflows()
+    public function flows()
     {
-        return $this->hasMany(Inflow::class);
+        return $this->hasMany(Flow::class);
     }
 }

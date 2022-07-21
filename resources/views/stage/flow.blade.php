@@ -22,7 +22,7 @@
         <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
           
           <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
-            <form action="{{ route('inflows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
+            <form action="{{ route('flows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
               @csrf
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
@@ -132,19 +132,19 @@
             </tr>
         </thead>
         <tbody>
-          @foreach ($inflows as $inflow)
+          @foreach ($flows as $flow)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4">
-                  {{ Str::limit($inflow->name, 25) }}
+                  {{ Str::limit($flow->name, 25) }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ $inflow->created_at }}
+                  {{ $flow->created_at }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ $inflow->value }}
+                  {{ $flow->value }}
                 </td>
                 <td class="px-6 py-4">
-                  @foreach ($inflow->categories as $category)
+                  @foreach ($flow->categories as $category)
                   {{ $category->name }}
                   @if (!$loop->last)
                     ,
