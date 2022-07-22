@@ -52,13 +52,24 @@ class FlowController extends Controller
                 ]);
             }
         }
-        
-        Flow::create([
-            'name' => $request->title,
-            'value' => $request->value,
-            'date' => now(),
-            'user_id' => auth()->user()->id,
-        ]);
+
+        if ($request->inflow === inflow.selected) {
+            Flow::create([
+                'name' => $request->title,
+                'value' => $request->value,
+                'date' => now(),
+                'type' => $request->inflow,
+                'user_id' => auth()->user()->id,
+            ]);
+        } else if ($request->outflow === selected) {
+            Flow::create([
+                'name' => $request->title,
+                'value' => $request->value,
+                'date' => now(),
+                'type' => $request->outflow,
+                'user_id' => auth()->user()->id,
+            ]);
+        }
 
         return redirect()->route('flows.index')->with('success', 'Votre post a été créé');
     }

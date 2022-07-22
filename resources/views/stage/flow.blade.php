@@ -15,12 +15,9 @@
     
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal_">
-      
       <div id="modal_bg" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
       <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-          
           <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
             <form action="{{ route('flows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
               @csrf
@@ -34,7 +31,6 @@
                     <input type="number" step="0.01" name="value" id="value" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency" required>
                   </div>
               </div>
-              
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -42,7 +38,6 @@
                 </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                  
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     @foreach ($categories as $category)
                     <td class="px-6 py-4">
@@ -52,23 +47,21 @@
                     </td>
                     @endforeach
                   </tr>
-                  
               </div>
-              
-
-              {{-- <div class="flex mt-4">
-                <input class="autocomplete" id="input-value" type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 border-gray-300 rounded-md">
-                
-              </div> --}}
-              
-
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                       
+                      <option id="inflow" name="inflow">Entrée</option>
+                      <option id="outflow" name="outflow">Sortie</option>
+                    
+                    </select>
+              </div>
               <button type="submit"{{--  onclick="submitButtonClick(event)" --}} class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
               </button>
-
             </form>
             <div class="mt-5 sm:mt-6">
               <button type="button" class="modal_bg inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Go back to dashboard</button>
@@ -181,7 +174,13 @@
 
     cat_all.forEach(element => {
       element.addEventListener('click', function () {
-        cat_add.value += element.firstChild.nodeValue.trim() + ", ";
+        if(cat_add.value != null && cat_add.value.substr(-1) != ", ") {
+          cat_add.value += ", ";
+          cat_add.value += element.firstChild.nodeValue.trim() + ", ";
+        } else {
+          cat_add.value += element.firstChild.nodeValue.trim() + ", ";
+        }
+        
       })
     })
   

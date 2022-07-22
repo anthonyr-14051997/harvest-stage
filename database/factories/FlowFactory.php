@@ -20,7 +20,7 @@ class FlowFactory extends Factory
             'value' => $this->faker->randomFloat(2, 100, 2500),
             'name' => $this->faker->words(rand(1, 3), true),
             'date' => $this->faker->date(),
-            'type' => $this->faker->randomElements(['inflow', 'outflow'], 1),
+            'type' => $this->faker->randomElement(['inflow', 'outflow'], 1),
             'user_id' => $this->faker->numberBetween(1, 11),
             'percentage_urssaf_id' => $this->faker->numberBetween(1, 3)
         ];

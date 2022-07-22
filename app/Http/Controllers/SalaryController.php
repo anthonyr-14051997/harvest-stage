@@ -23,7 +23,7 @@ class SalaryController extends Controller
 
         // salaire 
 
-        $flows = Flow::where('user_id', auth()->user()->id)->get();
+        $flows = Flow::where('user_id', auth()->user()->id)->where('type', 'inflow')->get();
         foreach ($flows as $flow) {
             $flow_value = $flow->value;
             $flow_percent = $flow->percentage_urssaf->percentage;
@@ -34,7 +34,9 @@ class SalaryController extends Controller
 
         // salaire généraux
 
-        $flow_year_sum = Flow::where('user_id', auth()->user()->id)->whereYear('date', date('Y'))->where('type', 'inflow')->sum('value');
+        /* date('Y') */
+        $flow_year_outflow = Flow::where('user_id', auth()->user()->id)->whereYear('date', '2008')->where('type', 'outflow')->sum('value');
+        $flow_year_sum = Flow::where('user_id', auth()->user()->id)->whereYear('date', '2008')->where('type', 'inflow')->sum('value');
 
         $flow_month = $flow_year_sum / 12;
 
@@ -67,12 +69,20 @@ class SalaryController extends Controller
                 break;
         }
 
+        $flow_taxe = $flow_taxe - $flow_year_outflow;
+
         $flow_month_taxe = $flow_taxe / 12;
 
-        $flow_year_sum = number_format($flow_year_sum, 2, '.', ' '); // CA sans taxes
+        $flow_fullOut = $flow_taxe - $flow_year_outflow;
+        $flow_month_fullOut = $flow_fullOut / 12;
+
+        $flow_year_sum = number_format($flow_year_sum, 2, '.', ' '); // CA brut
         $flow_month = number_format($flow_month, 2, '.', ' '); // salaire brut
-        $flow_taxe = number_format($flow_taxe, 2, '.', ' '); // CA avec taxes
+        $flow_taxe = number_format($flow_taxe, 2, '.', ' '); // CA net
         $flow_month_taxe = number_format($flow_month_taxe, 2, '.', ' '); // salaire net
+        $flow_month_fullOut = number_format($flow_month_fullOut, 2, '.', ' '); // salaire potentielle
+
+        
 
         /* 
         2022
@@ -83,7 +93,7 @@ class SalaryController extends Controller
         Supérieur à 160 336 €	45 % 
         */
         
-        return view('stage.salary', compact('flow_year_sum', 'flow_month', 'flow_taxe', 'flow_month_taxe'));
+        return view('stage.salary', compact('flow_year_sum', 'flow_month', 'flow_taxe', 'flow_month_taxe', 'flow_month_fullOut'));
     }
 
     /**
