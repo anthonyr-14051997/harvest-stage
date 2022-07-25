@@ -34,7 +34,7 @@
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
-                  <input type="text" id="input-value" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="price-currency">
+                  <input type="text" id="input-value" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="catégories">
                 </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
@@ -49,12 +49,17 @@
                   </tr>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                       
-                      <option id="inflow" name="inflow">Entrée</option>
-                      <option id="outflow" name="outflow">Sortie</option>
-                    
-                    </select>
+                <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                  <option id="inflow" selected>Entrée</option>
+                  <option id="outflow">Sortie</option>
+                </select>
+                <input type="text" id="flow" name="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type">
+              </div>
+              <div class="periode border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label class="block text-sm font-medium text-gray-700">Période</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input type="text" id="periode" name="periode" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre période" aria-describedby="période">
+                </div>
               </div>
               <button type="submit"{{--  onclick="submitButtonClick(event)" --}} class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
@@ -180,10 +185,62 @@
         } else {
           cat_add.value += element.firstChild.nodeValue.trim() + ", ";
         }
-        
       })
     })
   
+  </script>
+
+  <script type="text/javascript">
+
+    const inflow = document.getElementById('inflow');
+    const outflow = document.getElementById('outflow');
+    const flow_ = document.getElementById('flow');
+    const form = document.querySelector('.form');
+    const periode_ = document.querySelector('.periode');
+
+    periode_.style.display = "none";
+
+    window.addEventListener('load', function () {
+      flow_.style.display = "none";
+    })
+
+    form.addEventListener('click', function () {
+      flow(inflow, outflow, periode_);
+    });
+
+    function flow(inflow, outflow, periode_ = null) {
+
+      const periode_id = document.getElementById('periode');
+      if(periode_id.hasAttribute('required')) {
+        periode_id.removeAttribute('required');
+      }
+
+      if(inflow.selected) {
+        if(document.querySelector('[name="outflow"]')) {
+          flow_.setAttribute('name', 'inflow');
+          flow_.value = "inflow";
+        } else {
+          flow_.value = "inflow";
+          flow_.setAttribute('name', 'inflow');
+        }
+      } else if(outflow.selected) {
+        periode(periode_, periode_id);
+        if(document.querySelector('[name="inflow"]')) {
+          flow_.setAttribute('name', 'outflow');
+          flow_.value = "outflow";
+        } else {
+          flow_.value = "outflow";
+          flow_.setAttribute('name', 'outflow');
+        }
+      }
+    }
+
+    function periode(periode_, periode_id) {
+      periode_.style.display="block";
+      periode_id.setAttribute('required', 'true');
+    }
+    
+
   </script>
 
   <script type="text/javascript">

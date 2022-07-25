@@ -41,6 +41,8 @@ class FlowController extends Controller
     public function store(StoreFlowRequest $request)
     {
 
+        dd($request);
+
         $collection = Str::of($request->categories)->explode(',');
 
         foreach ($collection as $category) {
@@ -53,7 +55,7 @@ class FlowController extends Controller
             }
         }
 
-        if ($request->inflow === inflow.selected) {
+        if ($request->inflow) {
             Flow::create([
                 'name' => $request->title,
                 'value' => $request->value,
@@ -61,7 +63,7 @@ class FlowController extends Controller
                 'type' => $request->inflow,
                 'user_id' => auth()->user()->id,
             ]);
-        } else if ($request->outflow === selected) {
+        } else if ($request->outflow) {
             Flow::create([
                 'name' => $request->title,
                 'value' => $request->value,
