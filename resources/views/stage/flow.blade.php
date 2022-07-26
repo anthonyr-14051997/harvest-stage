@@ -34,7 +34,7 @@
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
-                  <input type="text" id="input-value" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="catégories">
+                  <input type="text" id="categories" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="catégories">
                 </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
@@ -54,12 +54,6 @@
                   <option id="outflow">Sortie</option>
                 </select>
                 <input type="text" id="flow" name="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type">
-              </div>
-              <div class="periode border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                <label class="block text-sm font-medium text-gray-700">Période</label>
-                <div class="mt-1 relative rounded-md shadow-sm">
-                  <input type="text" id="periode" name="periode" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre période" aria-describedby="période">
-                </div>
               </div>
               <button type="submit"{{--  onclick="submitButtonClick(event)" --}} class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
@@ -114,6 +108,15 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
+                    <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                      <option>Entrée/Sortie</option>
+                      <option>Entrée</option>
+                      <option>Sortie</option>
+                    </select>
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="mb-3 xl:w-76">
                     <select class="form-select appearance-none block w-full {{-- absolute de la flèche--> --}} px-3 py-1.5 {{-- <-- absolute de la flèche --}} text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                       <option>Toutes les catégories</option>
                       
@@ -142,16 +145,18 @@
                   {{ $flow->value }}
                 </td>
                 <td class="px-6 py-4">
+                  {{ $flow->type }}
+                </td>
+                <td class="px-6 py-4">
                   @foreach ($flow->categories as $category)
                   {{ $category->name }}
                   @if (!$loop->last)
                     ,
                   @endif
                   @endforeach
-                  
                 </td>
                 <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="#" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
             </tr>
           @endforeach
@@ -172,10 +177,29 @@
 
   <script type="text/javascript">
 
-    // category
-
     const cat_add = document.querySelector('#input-value');
     const cat_all = document.querySelectorAll('.all_category');
+
+    const inflow = document.getElementById('inflow');
+    const outflow = document.getElementById('outflow');
+    const flow_ = document.getElementById('flow');
+    const select = document.querySelector('.form-select');
+
+    const edit = document.querySelectorAll('.edit');
+    const title = document.getElementById('title');
+    const value = document.getElementById('value');
+    const cat = document.getElementById('categories');
+
+    const modal = document.getElementById('modal_');
+    const modal_bg_class = document.querySelector('.modal_bg');
+    const modal_bg_id = document.querySelector('#modal_bg');
+    const modal_op = document.getElementById('modal_op');
+
+  </script>
+
+  <script type="text/javascript">
+
+    // category
 
     cat_all.forEach(element => {
       element.addEventListener('click', function () {
@@ -192,28 +216,17 @@
 
   <script type="text/javascript">
 
-    const inflow = document.getElementById('inflow');
-    const outflow = document.getElementById('outflow');
-    const flow_ = document.getElementById('flow');
-    const form = document.querySelector('.form');
-    const periode_ = document.querySelector('.periode');
-
-    periode_.style.display = "none";
+    // input flow
 
     window.addEventListener('load', function () {
       flow_.style.display = "none";
     })
 
-    form.addEventListener('click', function () {
-      flow(inflow, outflow, periode_);
+    select.addEventListener('click', function () {
+      flow(inflow, outflow);
     });
 
-    function flow(inflow, outflow, periode_ = null) {
-
-      const periode_id = document.getElementById('periode');
-      if(periode_id.hasAttribute('required')) {
-        periode_id.removeAttribute('required');
-      }
+    function flow(inflow, outflow) {
 
       if(inflow.selected) {
         if(document.querySelector('[name="outflow"]')) {
@@ -224,7 +237,6 @@
           flow_.setAttribute('name', 'inflow');
         }
       } else if(outflow.selected) {
-        periode(periode_, periode_id);
         if(document.querySelector('[name="inflow"]')) {
           flow_.setAttribute('name', 'outflow');
           flow_.value = "outflow";
@@ -233,24 +245,42 @@
           flow_.setAttribute('name', 'outflow');
         }
       }
+
     }
 
-    function periode(periode_, periode_id) {
-      periode_.style.display="block";
-      periode_id.setAttribute('required', 'true');
-    }
-    
+  </script>
+
+  <script type="text/javascript">
+
+    // edit
+
+    edit.forEach(elem => {
+      elem.addEventListener('click', function () {
+
+        const parent = this.parentNode.parentNode;
+
+        modal.style.display = "block";
+
+        title.value = parent.childNodes[1].firstChild.nodeValue.trim();
+        value.value = parent.childNodes[5].firstChild.nodeValue.trim();
+
+        val = parent.childNodes[9].firstChild.nodeValue;
+        val_array = val.trim().split(',')
+
+        for(let i = 0; i < val_array.length; i++) {
+          cat.value += val_array[i].trim() + ", ";
+        }
+
+        flow_.setAttribute('name', 'inflow');
+
+      })
+    })
 
   </script>
 
   <script type="text/javascript">
 
     // modale
-
-      const modal = document.getElementById('modal_');
-      const modal_bg_class = document.querySelector('.modal_bg');
-      const modal_bg_id = document.querySelector('#modal_bg');
-      const modal_op = document.getElementById('modal_op');
 
       modal_op.style.cursor = "pointer";
       modal.style.display = "none";
