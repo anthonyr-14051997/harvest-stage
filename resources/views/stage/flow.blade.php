@@ -171,13 +171,9 @@
     </div>
   </nav>
 
-  <style>
-    
-  </style>
-
   <script type="text/javascript">
 
-    const cat_add = document.querySelector('#input-value');
+    const cat_add = document.querySelector('#categories');
     const cat_all = document.querySelectorAll('.all_category');
 
     const inflow = document.getElementById('inflow');
@@ -207,7 +203,6 @@
     cat_all.forEach(element => {
       element.addEventListener('click', function () {
         if(cat_add.value != null && cat_add.value.substr(-1) != ", ") {
-          cat_add.value += ", ";
           cat_add.value += element.firstChild.nodeValue.trim() + ", ";
         } else {
           cat_add.value += element.firstChild.nodeValue.trim() + ", ";
@@ -255,9 +250,8 @@
 
   <script type="text/javascript">
 
-    if(form.hasAttribute('action', "{{ route('flows.update', $flow) }}")) {
+    if(form.hasAttribute('action')) {
       form.setAttribute('action', "{{ route('flows.store') }}");
-      console.log('test');
     }
 
     // edit
@@ -274,11 +268,14 @@
         title.value = parent.childNodes[1].firstChild.nodeValue.trim();
         value.value = parent.childNodes[5].firstChild.nodeValue.trim();
 
-        const val = parent.childNodes[9].firstChild.nodeValue;
-        val_array = val.trim().split(',');
+        if (parent.childNodes[9].firstChild.nodeValue != " ") {
+          console.log('test');
+          const val = parent.childNodes[9].firstChild.nodeValue;
+          val_array = val.trim().split(',');
 
-        for(let i = 0; i < val_array.length; i++) {
-          cat.value += val_array[i].trim() + ", ";
+          for(let i = 0; i < val_array.length; i++) {
+            cat.value += val_array[i].trim() + ", ";
+          }
         }
 
         flow_.setAttribute('name', 'inflow');
