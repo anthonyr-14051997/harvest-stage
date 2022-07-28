@@ -202,7 +202,8 @@
 
     cat_all.forEach(element => {
       element.addEventListener('click', function () {
-        if(cat_add.value != null && cat_add.value.substr(-1) != ", ") {
+        if(cat_add.value != "" && cat_add.value.substr(-2) != ", ") {
+          cat_add.value += ", ";
           cat_add.value += element.firstChild.nodeValue.trim() + ", ";
         } else {
           cat_add.value += element.firstChild.nodeValue.trim() + ", ";
