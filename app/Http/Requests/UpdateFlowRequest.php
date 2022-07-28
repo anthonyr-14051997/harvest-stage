@@ -13,7 +13,7 @@ class UpdateFlowRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateFlowRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'value' => 'required',
+            'categories' => 'required'
         ];
     }
 }

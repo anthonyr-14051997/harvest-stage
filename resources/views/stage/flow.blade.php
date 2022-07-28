@@ -55,7 +55,7 @@
                 </select>
                 <input type="text" id="flow" name="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type">
               </div>
-              <button type="submit"{{--  onclick="submitButtonClick(event)" --}} class="inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button type="submit" class="submit_btn inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -195,6 +195,9 @@
     const modal_bg_id = document.querySelector('#modal_bg');
     const modal_op = document.getElementById('modal_op');
 
+    const form = document.querySelector('form');
+    const btn = document.querySelector('.submit_btn');
+
   </script>
 
   <script type="text/javascript">
@@ -252,10 +255,17 @@
 
   <script type="text/javascript">
 
+    if(form.hasAttribute('action', "{{ route('flows.update', $flow) }}")) {
+      form.setAttribute('action', "{{ route('flows.store') }}");
+      console.log('test');
+    }
+
     // edit
 
     edit.forEach(elem => {
       elem.addEventListener('click', function () {
+
+        form.setAttribute('action', "{{ route('flows.update', $flow) }}");
 
         const parent = this.parentNode.parentNode;
 
@@ -264,8 +274,8 @@
         title.value = parent.childNodes[1].firstChild.nodeValue.trim();
         value.value = parent.childNodes[5].firstChild.nodeValue.trim();
 
-        val = parent.childNodes[9].firstChild.nodeValue;
-        val_array = val.trim().split(',')
+        const val = parent.childNodes[9].firstChild.nodeValue;
+        val_array = val.trim().split(',');
 
         for(let i = 0; i < val_array.length; i++) {
           cat.value += val_array[i].trim() + ", ";
@@ -299,8 +309,6 @@
         modal.style.display = "block";
       })
 </script>
-
-
 
 @stop
 @stop

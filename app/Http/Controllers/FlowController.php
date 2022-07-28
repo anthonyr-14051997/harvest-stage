@@ -107,7 +107,7 @@ class FlowController extends Controller
      */
     public function update(UpdateFlowRequest $request, Flow $flow)
     {
-        //
+        dd($request->$flow);
     }
 
     /**
