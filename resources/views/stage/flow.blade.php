@@ -158,6 +158,9 @@
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="{{-- {{ route('flows.destroy', $flow) }} --}}" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">delete</a>
+                </td>
             </tr>
           @endforeach
         </tbody>
@@ -215,16 +218,16 @@
 
   <script type="text/javascript">
 
-    if(form.hasAttribute('action')) {
+    /* if(form.hasAttribute('action')) {
       form.setAttribute('action', "{{ route('flows.store') }}");
-    }
+    } */
 
     // edit
 
     edit.forEach(elem => {
       elem.addEventListener('click', function () {
 
-        form.setAttribute('action', "{{ route('flows.update', $flow) }}");
+        /* form.setAttribute('action', "{{ route('flows.update', $flow) }}"); */
 
         const parent = this.parentNode.parentNode;
 

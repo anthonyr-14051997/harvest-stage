@@ -60,21 +60,21 @@ class FlowController extends Controller
             }
         }
 
-        if ($request->inflow) {
+        if ($request->flow === "inflow") {
             Flow::create([
                 'name' => $request->title,
                 'value' => $request->value,
                 'date' => now(),
-                'type' => $request->inflow,
+                'type' => $request->flow,
                 'user_id' => auth()->user()->id,
                 'percentage_urssaf_id' => '1'
             ]);
-        } else if ($request->outflow) {
+        } else if ($request->flow === "outflow") {
             Flow::create([
                 'name' => $request->title,
                 'value' => $request->value,
                 'date' => now(),
-                'type' => $request->outflow,
+                'type' => $request->flow,
                 'user_id' => auth()->user()->id,
                 'percentage_urssaf_id' => '1'
             ]);
