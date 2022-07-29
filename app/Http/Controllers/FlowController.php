@@ -7,6 +7,7 @@ use App\Models\Flow;
 use App\Http\Requests\StoreFlowRequest;
 use App\Http\Requests\UpdateFlowRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class FlowController extends Controller
 {
@@ -17,9 +18,13 @@ class FlowController extends Controller
      */
     public function index()
     {
+
         $flows = Flow::where('user_id', auth()->user()->id)->get();
+
         $categories = auth()->user()->categories;
+
         return view('stage.flow', compact('flows', 'categories'));
+
     }
 
     /**
@@ -29,7 +34,9 @@ class FlowController extends Controller
      */
     public function create()
     {
+
         return view('stage.add_flow');
+
     }
 
     /**
@@ -107,7 +114,9 @@ class FlowController extends Controller
      */
     public function update(UpdateFlowRequest $request, Flow $flow)
     {
-        dd($request->$flow);
+
+        dd($request);
+
     }
 
     /**
@@ -118,6 +127,14 @@ class FlowController extends Controller
      */
     public function destroy(Flow $flow)
     {
-        //
+
+        if (Gate::denies('destroy-post', $flow)) {
+            abort(403);
+        }
+
+        $flow->delete();
+
+        return redirect()->route('flows.index')->with('success', 'Votre post a été supprimé');
+
     }
 }

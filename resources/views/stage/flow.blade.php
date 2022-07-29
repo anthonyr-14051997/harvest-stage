@@ -49,11 +49,11 @@
                   </tr>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-                <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                  <option id="inflow" selected>Entrée</option>
-                  <option id="outflow">Sortie</option>
+                <select name="flow" class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                  <option id="inflow" value="inflow" name="inflow" @if (old('flow') == "inflow" ) {{ 'selected' }} @endif>Entrée</option>
+                  <option id="outflow" value="outflow" name="outflow" @if (old('flow') == "outflow" ) {{ 'selected' }} @endif>Sortie</option>
                 </select>
-                <input type="text" id="flow" name="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type">
+                {{-- <input type="text" id="flow" name="" value="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type"> --}}
               </div>
               <button type="submit" class="submit_btn inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/plus-sm -->
@@ -215,42 +215,6 @@
 
   <script type="text/javascript">
 
-    // input flow
-
-    window.addEventListener('load', function () {
-      flow_.style.display = "none";
-    })
-
-    select.addEventListener('click', function () {
-      flow(inflow, outflow);
-    });
-
-    function flow(inflow, outflow) {
-
-      if(inflow.selected) {
-        if(document.querySelector('[name="outflow"]')) {
-          flow_.setAttribute('name', 'inflow');
-          flow_.value = "inflow";
-        } else {
-          flow_.value = "inflow";
-          flow_.setAttribute('name', 'inflow');
-        }
-      } else if(outflow.selected) {
-        if(document.querySelector('[name="inflow"]')) {
-          flow_.setAttribute('name', 'outflow');
-          flow_.value = "outflow";
-        } else {
-          flow_.value = "outflow";
-          flow_.setAttribute('name', 'outflow');
-        }
-      }
-
-    }
-
-  </script>
-
-  <script type="text/javascript">
-
     if(form.hasAttribute('action')) {
       form.setAttribute('action', "{{ route('flows.store') }}");
     }
@@ -269,17 +233,17 @@
         title.value = parent.childNodes[1].firstChild.nodeValue.trim();
         value.value = parent.childNodes[5].firstChild.nodeValue.trim();
 
-        if (parent.childNodes[9].firstChild.nodeValue != " ") {
+        const val = parent.childNodes[9].firstChild.nodeValue;
+
+        if (val != val.search(/[^a-zA-Z]+/)) {
           console.log('test');
-          const val = parent.childNodes[9].firstChild.nodeValue;
+          
           val_array = val.trim().split(',');
 
           for(let i = 0; i < val_array.length; i++) {
             cat.value += val_array[i].trim() + ", ";
           }
         }
-
-        flow_.setAttribute('name', 'inflow');
 
       })
     })
