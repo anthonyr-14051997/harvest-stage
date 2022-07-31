@@ -7,6 +7,7 @@ use App\Models\Salary;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\PercentageUrssaf;
+use App\Models\FixedCost;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         
         User::factory(10)->create();
         Flow::factory(500)->create();
+        FixedCost::factory(20)->create();
 
         Flow::all()->each(function ($flow) use ($categories) {
             $flow->categories()->attach(
@@ -32,15 +34,15 @@ class DatabaseSeeder extends Seeder
         });
 
         PercentageUrssaf::create([
-            'name' => 'achat revente hébergement', 
+            'name' => 'achat revente hébergement',
             'percentage' => '12.8'
         ]);
         PercentageUrssaf::create([
-            'name' => 'profession libérale non reglementée', 
+            'name' => 'profession libérale non reglementée',
             'percentage' => '22'
         ]);
         PercentageUrssaf::create([
-            'name' => 'profession libérale', 
+            'name' => 'profession libérale',
             'percentage' => '22.2'
         ]);
 

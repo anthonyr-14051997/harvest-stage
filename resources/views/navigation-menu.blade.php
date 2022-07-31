@@ -19,7 +19,10 @@
                         {{ __('Salaire') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('flows.index') }}" :active="request()->routeIs('flows.index')">
-                        {{ __('Entrées') }}
+                        {{ __('Entrées/Sorties') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('fixeds.index') }}" :active="request()->routeIs('fixeds.index')">
+                        {{ __('Sorties fixe') }}
                     </x-jet-nav-link>
                 </div> 
 

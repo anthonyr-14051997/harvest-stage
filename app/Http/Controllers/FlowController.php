@@ -21,7 +21,7 @@ class FlowController extends Controller
 
         $flows = Flow::where('user_id', auth()->user()->id)->get();
 
-        $categories = auth()->user()->categories;
+        $categories = Category::where('user_id', auth()->user()->id)->get();
 
         return view('stage.flow', compact('flows', 'categories'));
 

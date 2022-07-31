@@ -74,4 +74,9 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
+    public function fixed_cost()
+    {
+        return $this->hasMany(FixedCost::class);
+    }
+
 }

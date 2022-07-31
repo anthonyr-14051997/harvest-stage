@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Salary>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\fixedCost>
  */
-class SalaryFactory extends Factory
+class FixedCostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,6 +20,7 @@ class SalaryFactory extends Factory
             'value' => $this->faker->randomFloat(2, 100, 2500),
             'name' => $this->faker->sentence(rand(5, 10), true),
             'periode' => $this->faker->numberBetween(1, 12),
+            'date' => $this->faker->date(),
             'user_id' => $this->faker->numberBetween(1, 11)
         ];
     }
