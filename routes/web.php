@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChartJSController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\FlowController;
+use App\Http\Controllers\FixedCostController;
 
 /*
 |--------------------------------------------------------------------------

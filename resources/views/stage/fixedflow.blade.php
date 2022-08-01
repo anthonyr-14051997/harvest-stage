@@ -4,7 +4,7 @@
 @section('table')
 
   @section('title')
-  <h2 class="text-2xl font-semibold text-gray-900">Entrées</h2>
+  <h2 class="text-2xl font-semibold text-gray-900">Sorties fixe</h2>
   @stop
 
   <div class="my-5">
@@ -19,7 +19,7 @@
       <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
           <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
-            <form action="{{ route('flows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
+            <form action="{{ route('fixeds.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
               @csrf
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
@@ -109,9 +109,9 @@
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
                     <select class="form-select appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                      <option>Entrée/Sortie</option>
-                      <option>Entrée</option>
-                      <option>Sortie</option>
+                      <option>Période</option>
+                      <option>Croissant</option>
+                      <option>Décroissant</option>
                     </select>
                   </div>
                 </th>
@@ -132,37 +132,42 @@
                     <span class="sr-only">Edit</span>
                   </div>
                 </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="mb-3 xl:w-76">
+                    <span class="sr-only">Supprimer</span>
+                  </div>
+                </th>
             </tr>
         </thead>
         <tbody>
-          @foreach ($flows as $flow)
+          @foreach ($fixflows as $fix)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4">
-                  {{ Str::limit($flow->name, 25) }}
+                  {{ Str::limit($fix->name, 25) }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ $flow->created_at }}
+                  {{ $fix->created_at }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ $flow->value }}
+                  {{ $fix->value }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ $flow->type }}
+                  {{ $fix->periode }}
                 </td>
                 <td class="px-6 py-4">
-                  @foreach ($flow->categories as $category)
+                  {{-- @foreach ($fix->categories as $category)
                     {{ $category->name }}
                     @if (!$loop->last)
                       ,
                     @endif
-                  @endforeach
+                  @endforeach --}}
                 </td>
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
                 <td class="px-6 py-4 text-right">
-                  <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="event.preventDefault; document.getElementById('destroy-flow-form').submit();">Supprimer
-                    <form action="{{ route('flows.destroy', $flow) }}" method="post" id="destroy-flow-form">
+                  <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="event.preventDefault; document.getElementById('destroy-fix-form').submit();">Supprimer
+                    <form action="{{ route('fixeds.destroy', $fix) }}" method="post" id="destroy-fix-form">
                       @csrf
                       @method('delete')
                     </form>
@@ -226,7 +231,7 @@
   <script type="text/javascript">
 
     if(form.hasAttribute('action')) {
-      form.setAttribute('action', "{{ route('flows.store') }}");
+      form.setAttribute('action', "{{ route('fixeds.store') }}");
     }
 
     // edit
@@ -234,7 +239,7 @@
     edit.forEach(elem => {
       elem.addEventListener('click', function () {
 
-        form.setAttribute('action', "{{ route('flows.update', $flow) }}");
+        form.setAttribute('action', "{{ route('fixeds.update', $fix) }}");
 
         const parent = this.parentNode.parentNode;
 

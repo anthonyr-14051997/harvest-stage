@@ -28,7 +28,7 @@ class Flow extends Model
 
     public function fixed_cost()
     {
-        return $this->belongsTo(FixedCost::class);
+        return $this->where('type', 'outflow')->belongsTo(FixedCost::class);
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FixedCost;
+use App\Models\Category;
 use App\Http\Requests\StorefixedCostRequest;
 use App\Http\Requests\UpdatefixedCostRequest;
 
@@ -15,9 +16,11 @@ class FixedCostController extends Controller
      */
     public function index()
     {
-        $fixedflows = FixedCost::where('user_id', auth()->user()->id)->get();
+        $fixflows = FixedCost::where('user_id', auth()->user()->id)->get();
 
-        return view('stage.fixedflow', 'fixedflows');
+        $categories = Category::where('user_id', auth()->user()->id)->get();
+
+        return view('stage.fixedflow', compact('fixflows', 'categories'));
     }
 
     /**

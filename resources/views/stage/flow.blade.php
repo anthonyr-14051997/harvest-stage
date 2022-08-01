@@ -132,6 +132,11 @@
                     <span class="sr-only">Edit</span>
                   </div>
                 </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="mb-3 xl:w-76">
+                    <span class="sr-only">Supprimer</span>
+                  </div>
+                </th>
             </tr>
         </thead>
         <tbody>
