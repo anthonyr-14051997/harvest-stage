@@ -117,7 +117,7 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="mb-3 xl:w-76">
-                    <select class="form-select appearance-none block w-full {{-- absolute de la flèche--> --}} px-3 py-1.5 {{-- <-- absolute de la flèche --}} text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                    <select class="form-select appearance-none block w-full {{-- absolute de la flèche--> --}} {{-- px-3 py-1.5 --}} {{-- <-- absolute de la flèche --}} text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                       <option>Toutes les catégories</option>
                       
                       @foreach ($categories as $category)

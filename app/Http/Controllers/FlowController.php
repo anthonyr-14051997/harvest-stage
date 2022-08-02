@@ -60,25 +60,14 @@ class FlowController extends Controller
             }
         }
 
-        if ($request->flow === "inflow") {
-            Flow::create([
-                'name' => $request->title,
-                'value' => $request->value,
-                'date' => now(),
-                'type' => $request->flow,
-                'user_id' => auth()->user()->id,
-                'percentage_urssaf_id' => '1'
-            ]);
-        } else if ($request->flow === "outflow") {
-            Flow::create([
-                'name' => $request->title,
-                'value' => $request->value,
-                'date' => now(),
-                'type' => $request->flow,
-                'user_id' => auth()->user()->id,
-                'percentage_urssaf_id' => '1'
-            ]);
-        }
+        Flow::create([
+            'name' => $request->title,
+            'value' => $request->value,
+            'date' => now(),
+            'type' => $request->flow,
+            'user_id' => auth()->user()->id,
+            'percentage_urssaf_id' => '1'
+        ]);
 
         return redirect()->route('flows.index')->with('success', 'Votre post a été créé');
     }
@@ -127,10 +116,6 @@ class FlowController extends Controller
      */
     public function destroy(Flow $flow)
     {
-
-        if (Gate::denies('destroy-post', $flow)) {
-            abort(403);
-        }
 
         $flow->delete();
 
