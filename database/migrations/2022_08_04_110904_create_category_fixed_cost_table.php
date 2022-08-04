@@ -15,8 +15,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fixedcost_category', function (Blueprint $table) {
-
+        Schema::create('category_fixed_cost', function (Blueprint $table) {
+            
             $table->foreignIdFor(FixedCost::class);
             $table->foreignIdFor(Category::class);
             
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fixedcost_category');
+        Schema::dropIfExists('category_fixed_cost');
     }
 };

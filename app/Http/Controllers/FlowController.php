@@ -73,36 +73,6 @@ class FlowController extends Controller
         $flow->categories()->attach($id);
 
         return redirect()->route('flows.index')->with('success', 'Votre post a été créé');
-
-        /* 
-        $fixflows = FixedCost::where('user_id', auth()->user()->id)->get();
-
-        $categories = Category::where('user_id', auth()->user()->id)->get();
-
-        public function users()
-        {
-            return $this->belongsTo(User::class);
-        }
-
-        public function categories()
-        {
-            return $this->belongsToMany(Category::class);
-        }
-
-        return [
-            'value' => $this->faker->randomFloat(2, 100, 2500),
-            'name' => $this->faker->sentence(rand(5, 10), true),
-            'periode' => $this->faker->numberBetween(1, 12),
-            'date' => $this->faker->date(),
-            'user_id' => $this->faker->numberBetween(1, 11)
-        ];
-
-        $table->foreignIdFor(FixedCost::class);
-        $table->foreignIdFor(Category::class);
-
-        FixedCost::factory(20)->create(); */
-
-        return view('stage.fixedflow', compact('fixflows', 'categories'));
     }
 
     /**

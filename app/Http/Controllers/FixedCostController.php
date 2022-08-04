@@ -41,7 +41,22 @@ class FixedCostController extends Controller
      */
     public function store(StoreFixedCostRequest $request)
     {
-        //
+        $collection = Str::of($request->categories)->explode(',');
+
+        foreach ($collection as $category) {
+            $check_category = Str::of($category)->trim();
+            if($check_category != ""){
+                Category::firstOrCreate([
+                    'name' => $check_category,
+                    'user_id' => auth()->user()->id,
+                ]);
+            }
+        }
+
+        $id = Category::where('name', $check_category)->where('user_id', auth()->user()->id)->first();
+        $fixedflow->categories()->attach($id);
+
+        return redirect()->route('fixeds.index')->with('success', 'Votre post a été créé');
     }
 
     /**

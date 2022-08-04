@@ -33,6 +33,12 @@ class DatabaseSeeder extends Seeder
             );
         });
 
+        FixedCost::all()->each(function ($fixedcost) use ($categories) {
+            $fixedcost->categories()->attach(
+                $categories->random(rand(1, 20))->pluck('id')->toArray()
+            );
+        });
+
         PercentageUrssaf::create([
             'name' => 'achat revente hébergement',
             'percentage' => '12.8'
