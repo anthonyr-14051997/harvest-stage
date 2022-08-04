@@ -260,7 +260,7 @@
               @yield('overview')
 
               {{-- ----- tableau --}}
-              <div class="mt-8">
+              <div class="mt-8 flex-wrap">
                 @yield('table')
                     
 

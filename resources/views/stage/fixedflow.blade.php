@@ -70,8 +70,10 @@
       </div>
     </div>
 
-    <span id="modal_op" class="inline-flex items-center mb-6 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
-  
+    <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+      <p class="text-2xl font-semibold text-gray-900">Cliquez ici pour créer une sortie fixe</p>
+      <span id="modal_op" class="inline-flex items-center mb-6 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer</span>
+    </div>
 
   <!-- Activity list (smallest breakpoint only) -->
 
@@ -157,12 +159,12 @@
                 <td class="px-6 py-4">
 
                   {{-- {{ dump($fix->categories) }} --}}
-                  {{-- @foreach ($fix->categories as $category)
+                  @foreach ($fix->categories as $category)
                     {{ $category->name }}
                     @if (!$loop->last)
                       ,
                     @endif
-                  @endforeach --}}
+                  @endforeach
                 </td>
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
