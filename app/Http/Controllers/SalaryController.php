@@ -35,8 +35,8 @@ class SalaryController extends Controller
         // salaire généraux
 
         /* date('Y') */
-        $flow_year_outflow = Flow::where('user_id', auth()->user()->id)->whereYear('date', '2008')->where('type', 'outflow')->sum('value');
-        $flow_year_sum = Flow::where('user_id', auth()->user()->id)->whereYear('date', '2008')->where('type', 'inflow')->sum('value');
+        $flow_year_outflow = Flow::where('user_id', auth()->user()->id)->whereYear('date', date('Y'))->where('type', 'outflow')->sum('value');
+        $flow_year_sum = Flow::where('user_id', auth()->user()->id)->whereYear('date', date('Y'))->where('type', 'inflow')->sum('value');
 
         $flow_month = $flow_year_sum / 12;
 

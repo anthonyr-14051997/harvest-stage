@@ -12,6 +12,11 @@
         <span class="block text-red-500">{{ $error }}</span>
     @endforeach
   </div>
+  <div class="my-5">
+    @if(session('success'))
+        {{ session('success') }}
+    @endif
+  </div>
     
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal_">
@@ -19,6 +24,8 @@
       <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
           <div class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
+            
+            {{-- form create --}}
             <form action="{{ route('flows.store') }}" method="post" enctype="multipart/form-data" class="form m-6">
               @csrf
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
@@ -62,6 +69,53 @@
                 </svg>
               </button>
             </form>
+
+            {{-- form edit --}}
+            <form action="{{-- {{ route('flows.update', $flows) }} --}}" method="post" enctype="multipart/form-data" class="form_edit m-6">
+              @method('put')
+              @csrf
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Titre</label>
+                  <input type="text" name="title" id="title_update" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre titre" required>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  <label for="price" class="block text-sm font-medium text-gray-700">Valeur</label>
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                    <input type="number" step="0.01" name="value" id="value_update" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00" aria-describedby="price-currency" required>
+                  </div>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label class="block text-sm font-medium text-gray-700">Catégorie</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input type="text" id="categories_update" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="catégories">
+                </div>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    @foreach ($categories as $category)
+                    <td class="px-6 py-4">
+                      <button type="button" class="all_category inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {{ $category->name }}
+                      </button>
+                    </td>
+                    @endforeach
+                  </tr>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <select name="flow" class="form-select_update appearance-none block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                  <option id="inflow_update" value="inflow" name="inflow" @if (old('flow') == "inflow" ) {{ 'selected' }} @endif>Entrée</option>
+                  <option id="outflow_update" value="outflow" name="outflow" @if (old('flow') == "outflow" ) {{ 'selected' }} @endif>Sortie</option>
+                </select>
+                {{-- <input type="text" id="flow" name="" value="" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Entrée ou sortie" aria-describedby="type"> --}}
+              </div>
+              <button type="submit" class="submit_btn inline-flex justify-center w-full rounded-full mt-6 shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <!-- Heroicon name: outline/plus-sm -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </button>
+            </form>
+
             <div class="mt-5 sm:mt-6">
               <button type="button" class="modal_bg inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">Go back to dashboard</button>
             </div>
@@ -70,8 +124,9 @@
       </div>
     </div>
 
-    <span id="modal_op" class="inline-flex items-center mb-6 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
-  
+    <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+      <span id="modal_op" class="inline-flex items-center mb-6 px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Créer mon entrée</span>
+    </div>
 
   <!-- Activity list (smallest breakpoint only) -->
 
@@ -193,20 +248,23 @@
 
     const inflow = document.getElementById('inflow');
     const outflow = document.getElementById('outflow');
+    const inflow_update = document.getElementById('inflow_update');
+    const outflow_update = document.getElementById('outflow_update');
     const flow_ = document.getElementById('flow');
-    const select = document.querySelector('.form-select');
 
     const edit = document.querySelectorAll('.edit');
-    const title = document.getElementById('title');
-    const value = document.getElementById('value');
-    const cat = document.getElementById('categories');
+    const title = document.getElementById('title_update');
+    const value = document.getElementById('value_update');
+    const cat = document.getElementById('categories_update');
+    const select = document.querySelector('.form-select');
 
     const modal = document.getElementById('modal_');
     const modal_bg_class = document.querySelector('.modal_bg');
     const modal_bg_id = document.querySelector('#modal_bg');
     const modal_op = document.getElementById('modal_op');
 
-    const form = document.querySelector('form');
+    const form = document.querySelector('.form');
+    const form_edit = document.querySelector('.form_edit');
     const btn = document.querySelector('.submit_btn');
 
   </script>
@@ -230,28 +288,35 @@
 
   <script type="text/javascript">
 
-    if(form.hasAttribute('action')) {
-      form.setAttribute('action', "{{ route('flows.store') }}");
-    }
-
     // edit
 
     edit.forEach(elem => {
       elem.addEventListener('click', function () {
 
-        form.setAttribute('action', "{{ route('flows.update', $flow) }}");
-
         const parent = this.parentNode.parentNode;
 
         modal.style.display = "block";
+        form.style.display = "none";
+        form_edit.style.display = "block";
 
         title.value = parent.childNodes[1].firstChild.nodeValue.trim();
         value.value = parent.childNodes[5].firstChild.nodeValue.trim();
 
+        if(parent.childNodes[7].firstChild.nodeValue.trim() === "inflow") {
+          const changeSelected = (e) => {
+            const select = document.querySelector('.form-select_update');
+            select.value = 'inflow';
+          }
+        } else if(parent.childNodes[7].firstChild.nodeValue.trim() === "outflow") {
+          const changeSelected = (e) => {
+            const select = document.querySelector('.form-select_update');
+            select.value = 'outflow';
+          }
+        }
+
         const val = parent.childNodes[9].firstChild.nodeValue;
 
         if (val != val.search(/[^a-zA-Z]+/)) {
-          console.log('test');
           
           val_array = val.trim().split(',');
 
@@ -271,6 +336,7 @@
 
       modal_op.style.cursor = "pointer";
       modal.style.display = "none";
+      form_edit.style.display = "none";
 
       window.addEventListener('click', function(e) {
         if (e.target === modal_bg_id) {

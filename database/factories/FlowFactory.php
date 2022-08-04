@@ -23,7 +23,6 @@ class FlowFactory extends Factory
             'type' => $this->faker->randomElement(['inflow', 'outflow'], 1),
             'user_id' => $this->faker->numberBetween(1, 11),
             'percentage_urssaf_id' => $this->faker->numberBetween(1, 3),
-            'fixed_cost_id' => $this->faker->numberBetween(1, 20)
         ];
     }
 }

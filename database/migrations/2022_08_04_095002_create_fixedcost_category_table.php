@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\User;
+use App\Models\FixedCost;
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,16 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fixed_costs', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('value', 6, 2);
-            $table->string('name');
-            $table->date('date');
-            $table->integer('periode');
-            $table->timestamps();
+        Schema::create('fixedcost_category', function (Blueprint $table) {
 
-            $table->foreignIdFor(User::class);
-
+            $table->foreignIdFor(FixedCost::class);
+            $table->foreignIdFor(Category::class);
+            
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fixed_costs');
+        Schema::dropIfExists('fixedcost_category');
     }
 };

@@ -26,9 +26,4 @@ class Flow extends Model
         return $this->belongsTo(PercentageUrssaf::class);
     }
 
-    public function fixed_cost()
-    {
-        return $this->where('type', 'outflow')->belongsTo(FixedCost::class);
-    }
-
 }

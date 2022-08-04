@@ -155,12 +155,14 @@
                   {{ $fix->periode }}
                 </td>
                 <td class="px-6 py-4">
-                  @foreach ($fix->categories as $category)
+
+                  {{-- {{ dump($fix->categories) }} --}}
+                  {{-- @foreach ($fix->categories as $category)
                     {{ $category->name }}
                     @if (!$loop->last)
                       ,
                     @endif
-                  @endforeach
+                  @endforeach --}}
                 </td>
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="edit font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
@@ -230,16 +232,10 @@
 
   <script type="text/javascript">
 
-    if(form.hasAttribute('action')) {
-      form.setAttribute('action', "{{ route('fixeds.store') }}");
-    }
-
     // edit
 
     edit.forEach(elem => {
       elem.addEventListener('click', function () {
-
-        form.setAttribute('action', "{{ route('fixeds.update', $fix) }}");
 
         const parent = this.parentNode.parentNode;
 

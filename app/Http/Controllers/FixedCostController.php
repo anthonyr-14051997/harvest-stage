@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\FixedCost;
 use App\Models\Category;
-use App\Http\Requests\StorefixedCostRequest;
-use App\Http\Requests\UpdatefixedCostRequest;
+use App\Http\Requests\StoreFixedCostRequest;
+use App\Http\Requests\UpdateFixedCostRequest;
 
 class FixedCostController extends Controller
 {
@@ -36,10 +36,10 @@ class FixedCostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorefixedCostRequest  $request
+     * @param  \App\Http\Requests\StoreFixedCostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorefixedCostRequest $request)
+    public function store(StoreFixedCostRequest $request)
     {
         //
     }
@@ -47,10 +47,10 @@ class FixedCostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\fixedCost  $fixedCost
+     * @param  \App\Models\FixedCost  $fixedCost
      * @return \Illuminate\Http\Response
      */
-    public function show(fixedCost $fixedCost)
+    public function show(FixedCost $fixedCost)
     {
         //
     }
@@ -58,10 +58,10 @@ class FixedCostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\fixedCost  $fixedCost
+     * @param  \App\Models\FixedCost  $fixedCost
      * @return \Illuminate\Http\Response
      */
-    public function edit(fixedCost $fixedCost)
+    public function edit(FixedCost $fixedCost)
     {
         //
     }
@@ -69,11 +69,11 @@ class FixedCostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatefixedCostRequest  $request
-     * @param  \App\Models\fixedCost  $fixedCost
+     * @param  \App\Http\Requests\UpdateFixedCostRequest  $request
+     * @param  \App\Models\FixedCost  $fixedCost
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatefixedCostRequest $request, fixedCost $fixedCost)
+    public function update(UpdateFixedCostRequest $request, FixedCost $fixedCost)
     {
         //
     }
@@ -81,10 +81,10 @@ class FixedCostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\fixedCost  $fixedCost
+     * @param  \App\Models\FixedCost  $fixedCost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(fixedCost $fixedCost)
+    public function destroy(FixedCost $fixedCost)
     {
         //
     }

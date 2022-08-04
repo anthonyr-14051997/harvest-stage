@@ -21,4 +21,9 @@ class Category extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function fixedcost()
+    {
+        return $this->belongsToMany(FixedCost::class);
+    }
+
 }

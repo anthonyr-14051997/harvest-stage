@@ -23,7 +23,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(FixedCost::class);
 
         });
     }
