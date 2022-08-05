@@ -35,7 +35,7 @@ class FlowController extends Controller
     public function create()
     {
 
-        return view('stage.add_flow');
+        return view('stage.flows');
 
     }
 
@@ -72,7 +72,9 @@ class FlowController extends Controller
         $id = Category::where('name', $check_category)->where('user_id', auth()->user()->id)->first();
         $flow->categories()->attach($id);
 
-        return redirect()->route('flows.index')->with('success', 'Votre post a été créé');
+        $request = $flow;
+
+        return redirect()->route('flows.index')->with('success', 'Votre post a été créé', $request);
     }
 
     /**
@@ -94,7 +96,7 @@ class FlowController extends Controller
      */
     public function edit(Flow $flow)
     {
-        //
+        return update($request, $flow);
     }
 
     /**
