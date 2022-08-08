@@ -50,17 +50,7 @@ class FlowController extends Controller
 
         $collection = Str::of($request->categories)->explode(',');
 
-        foreach ($collection as $category) {
-            $check_category = Str::of($category)->trim();
-            if($check_category != ""){
-                Category::firstOrCreate([
-                    'name' => $check_category,
-                    'user_id' => auth()->user()->id,
-                ]);
-            }
-        }
-
-        Flow::create([
+        $flow = Flow::create([
             'name' => $request->title,
             'value' => $request->value,
             'date' => now(),
@@ -69,8 +59,18 @@ class FlowController extends Controller
             'percentage_urssaf_id' => '1'
         ]);
 
-        $id = Category::where('name', $check_category)->where('user_id', auth()->user()->id)->first();
-        $flow->categories()->attach($id);
+        foreach ($collection as $category) {
+            $check_category = Str::of($category)->trim();
+            if($check_category != ""){
+                Category::firstOrCreate([
+                    'name' => $check_category,
+                    'user_id' => auth()->user()->id,
+                ]);
+            }
+
+            $id = Category::where('name', $check_category)->where('user_id', auth()->user()->id)->first();
+            $flow->categories()->attach($id);
+        }
 
         $request = $flow;
 
@@ -96,7 +96,9 @@ class FlowController extends Controller
      */
     public function edit(Flow $flow)
     {
-        return update($request, $flow);
+        $categories = Category::where('user_id', auth()->user()->id)->get();
+
+        return view('stage.flowEdit', compact('flow', 'categories'));
     }
 
     /**
