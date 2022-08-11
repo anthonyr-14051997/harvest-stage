@@ -32,6 +32,12 @@
                   </div>
               </div>
               <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label for="price" class="block text-sm font-medium text-gray-700">Période</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input type="number" name="periode" id="periode" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0" aria-describedby="price-currency" required>
+                </div>
+              </div>
+              <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label class="block text-sm font-medium text-gray-700">Catégorie</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                   <input type="text" id="categories" name="categories" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Votre catégorie" aria-describedby="catégories">

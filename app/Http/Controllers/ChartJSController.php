@@ -30,13 +30,25 @@ class ChartJSController extends Controller
 
     public function index()
     {
-        $flows = Flow::select(DB::raw("COUNT(*) as count"), "value")
-                    ->orderBy('user_id','ASC')
-                    ->pluck('count', 'value');
+        $outflow = DB::table('flows')
+                    ->select("date", "value")
+                    ->whereYear('date', date('Y'))
+                    ->where("type", "outflow")
+                    ->groupBy(DB::raw("date"))
+                    ->orderBy('date','ASC')
+                    ->pluck('value', 'date', "type");
+        $inflow = DB::table('flows')
+                    ->select("date", "value")
+                    ->whereYear('date', date('Y'))
+                    ->where("type", "inflow")
+                    ->groupBy(DB::raw("date"))
+                    ->orderBy('date','ASC')
+                    ->pluck('value', 'date', "type");
  
-        $labels = $flows->keys();
-        $data = $flows->values();
+        $labels = $outflow->keys();
+        $doto = $inflow->values();
+        $data = $outflow->values();
               
-        return view('chart', compact('labels', 'data'));
+        return view('chart', compact('labels', 'doto', 'data'));
     }
 }

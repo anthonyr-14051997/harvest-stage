@@ -111,7 +111,15 @@ class FlowController extends Controller
     public function update(UpdateFlowRequest $request, Flow $flow)
     {
 
-        dd($request);
+        $arrayUpdate = [
+            'name' => $request->title,
+            'value' => $request->value,
+            'type' => $request->flow
+        ];
+
+        $flow->update($arrayUpdate);
+
+        return redirect()->route('flows.index')->with('success', 'Votre post a été modifier');
 
     }
 
@@ -124,7 +132,9 @@ class FlowController extends Controller
     public function destroy(Flow $flow)
     {
 
-        $flow->delete();
+        $flows = Flow::find($flow)->delete();
+
+        dd($flow);
 
         return redirect()->route('flows.index')->with('success', 'Votre post a été supprimé');
 

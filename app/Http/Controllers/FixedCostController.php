@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FixedCost;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreFixedCostRequest;
 use App\Http\Requests\UpdateFixedCostRequest;
 
@@ -42,6 +43,13 @@ class FixedCostController extends Controller
     public function store(StoreFixedCostRequest $request)
     {
         $collection = Str::of($request->categories)->explode(',');
+
+        $fixedflow = FixedCost::create([
+            'name' => $request->title,
+            'value' => $request->value,
+            'période' => $request->periode,
+            'user_id' => auth()->user()->id
+        ]);
 
         foreach ($collection as $category) {
             $check_category = Str::of($category)->trim();

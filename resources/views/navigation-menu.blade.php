@@ -12,9 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('balances') }}" :active="request()->routeIs('balances')">
-                        {{ __('Balances') }}
-                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('salaries.index') }}" :active="request()->routeIs('salaries.index')">
                         {{ __('Salaire') }}
                     </x-jet-nav-link>

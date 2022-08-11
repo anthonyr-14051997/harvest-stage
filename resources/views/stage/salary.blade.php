@@ -3,6 +3,10 @@
 @section('sidebar')
 @section('table')
 
+@section('title')
+    <h2 class="text-2xl font-semibold text-gray-900">Salaire</h2>
+@stop
+
 <div class="my-5">
   @foreach ($errors->all() as $error)
       <span class="block text-red-500">{{ $error }}</span>
