@@ -9,7 +9,7 @@
     @stop
 
     <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-        <canvas id="myChart" height="100px"></canvas>
+        <a href="{{ route('flows.index') }}"><canvas id="myChart" height="100px"></canvas></a>
     </div>
 
     <a href="{{ route('salaries.index') }}" :active="request()->routeIs('salaries.index')" class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md">

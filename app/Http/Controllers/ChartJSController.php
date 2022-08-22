@@ -49,6 +49,6 @@ class ChartJSController extends Controller
         $doto = $inflow->values();
         $data = $outflow->values();
               
-        return view('chart', compact('labels', 'doto', 'data'));
+        return view('dashboard', compact('labels', 'doto', 'data'));
     }
 }

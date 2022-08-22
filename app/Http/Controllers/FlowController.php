@@ -111,6 +111,18 @@ class FlowController extends Controller
     public function update(UpdateFlowRequest $request, Flow $flow)
     {
 
+        $collection = Str::of($request->categories)->explode(',');
+
+        foreach ($collection as $category) {
+            $check_category = Str::of($category)->trim();
+            if($check_category != ""){
+                Category::updateOrCreate([
+                    'name' => $check_category],[
+                    'user_id' => auth()->user()->id,
+                ]);
+            }
+        }
+
         $arrayUpdate = [
             'name' => $request->title,
             'value' => $request->value,
@@ -131,10 +143,8 @@ class FlowController extends Controller
      */
     public function destroy(Flow $flow)
     {
-
-        $flows = Flow::find($flow)->delete();
-
-        dd($flow);
+        
+        $flow->delete();
 
         return redirect()->route('flows.index')->with('success', 'Votre post a été supprimé');
 

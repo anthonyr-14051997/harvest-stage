@@ -26,7 +26,6 @@ class UpdateFlowRequest extends FormRequest
         return [
             'title' => 'required',
             'value' => 'required',
-            'categories' => 'required',
         ];
     }
 }

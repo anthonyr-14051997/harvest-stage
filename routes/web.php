@@ -35,8 +35,4 @@ Route::middleware([
     Route::resource('salaries', SalaryController::class);
     Route::resource('flows', FlowController::class);
     Route::resource('fixeds', FixedCostController::class);
-    
-    Route::get('/stage/balances', function () {
-        return view('/stage/balances');
-    })->name('balances');
 });
